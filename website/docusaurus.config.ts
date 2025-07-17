@@ -40,26 +40,8 @@ const config: Config = {
     [
       'classic',
       {
-        docs: {
-          sidebarPath: './sidebars.ts',
-          editUrl:
-            'https://github.com/lamassu-labs/treasury-command-center/tree/main/docs/',
-        },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        docs: false,
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -78,29 +60,28 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'documentationSidebar',
-          position: 'left',
-          label: 'Documentation',
-        },
-        {
           type: 'dropdown',
-          label: 'Quick Start',
+          label: 'Quick Access',
           position: 'left',
           items: [
             {
               label: 'Business Value (3 min)',
-              to: '/docs/business/business-value-overview',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/business/BUSINESS_VALUE_OVERVIEW.md',
             },
             {
               label: 'Technical Evaluation (5 min)',
-              to: '/docs/technical/technical-evaluation',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/technical/TECHNICAL_EVALUATION.md',
             },
             {
-              label: 'Setup Guide (15 min)',
-              to: '/docs/getting-started/quick-start',
+              label: 'Quick Start Guide (15 min)',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/getting-started/QUICK_START.md',
             },
           ],
+        },
+        {
+          href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/README.md',
+          label: 'Full Documentation',
+          position: 'left',
         },
         {
           href: 'https://github.com/lamassu-labs/treasury-command-center',
@@ -117,15 +98,15 @@ const config: Config = {
           items: [
             {
               label: 'Business Value Overview',
-              to: '/docs/business/business-value-overview',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/business/BUSINESS_VALUE_OVERVIEW.md',
             },
             {
               label: 'Technical Evaluation',
-              to: '/docs/technical/technical-evaluation',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/technical/TECHNICAL_EVALUATION.md',
             },
             {
               label: 'Quick Start Guide',
-              to: '/docs/getting-started/quick-start',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/getting-started/QUICK_START.md',
             },
           ],
         },
@@ -134,15 +115,15 @@ const config: Config = {
           items: [
             {
               label: 'Contributing Guide',
-              to: '/docs/community/contribution-overview',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/community/CONTRIBUTION_OVERVIEW.md',
             },
             {
-              label: 'GitHub Discussions',
-              href: 'https://github.com/lamassu-labs/treasury-command-center/discussions',
+              label: 'GitHub Repository',
+              href: 'https://github.com/lamassu-labs/treasury-command-center',
             },
             {
-              label: 'Discord',
-              href: 'https://discord.gg/treasury-command-center',
+              label: 'GitHub Issues',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/issues',
             },
           ],
         },
@@ -150,16 +131,16 @@ const config: Config = {
           title: 'Resources',
           items: [
             {
-              label: 'GitHub Repository',
-              href: 'https://github.com/lamassu-labs/treasury-command-center',
-            },
-            {
-              label: 'API Reference',
-              to: '/docs/api',
+              label: 'Full Documentation',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/README.md',
             },
             {
               label: 'Architecture Overview',
-              to: '/docs/technical/architecture-overview',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/technical/ARCHITECTURE_OVERVIEW.md',
+            },
+            {
+              label: 'Production Deployment',
+              href: 'https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/deployment/PRODUCTION_DEPLOYMENT.md',
             },
           ],
         },
