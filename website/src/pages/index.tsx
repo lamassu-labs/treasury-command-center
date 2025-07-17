@@ -21,17 +21,17 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
-            📚 Start with Documentation Hub
+            href="https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/README.md">
+            📚 Documentation on GitHub
           </Link>
           <Link
             className="button button--primary button--lg"
-            to="/docs/business/BUSINESS_VALUE_OVERVIEW">
+            href="https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/business/BUSINESS_VALUE_OVERVIEW.md">
             💼 Business Value (3 min)
           </Link>
           <Link
             className="button button--outline button--lg"
-            to="/docs/getting-started/QUICK_START">
+            href="https://github.com/lamassu-labs/treasury-command-center/blob/main/docs/getting-started/QUICK_START.md">
             🚀 Quick Start (15 min)
           </Link>
         </div>

@@ -42,25 +42,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/lamassu-labs/treasury-command-center/tree/main/docs/',
-          exclude: [
-            '**/ANALYTICS_*.md',
-            '**/CONTENT_*.md',
-            '**/DIAGRAM_*.md',
-            '**/DOCUMENTATION_*.md',
-            '**/LAYER*.md',
-            '**/MERMAID_*.md',
-            '**/SPRINT_*.md',
-            '**/PERFORMANCE_*.md',
-            '**/USER_*.md',
-            '**/interactive/**',
-            '**/COMPREHENSIVE_DOCUMENTATION_INDEX.md',
-            '**/DEPLOYMENT_GUIDE.md',
-            '**/deploy-manual.sh',
-          ],
         },
         blog: {
           showReadingTime: true,
