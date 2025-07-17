@@ -197,14 +197,14 @@ sequenceDiagram
 | **Blockchain APIs** | 1K+ req/sec/network | Multiple RPC providers | Provider load balancing |
 
 ### **Response Time Targets**
-- **Portfolio Loading**: <2 seconds for complete multi-chain portfolio
-- **Real-time Updates**: <500ms for balance updates via WebSocket
-- **Report Generation**: <10 seconds for complex cross-chain reports
-- **API Response**: <200ms P95 for standard API operations
+- **Portfolio Loading**: Under 2 seconds for complete multi-chain portfolio
+- **Real-time Updates**: Under 500ms for balance updates via WebSocket
+- **Report Generation**: Under 10 seconds for complex cross-chain reports
+- **API Response**: Under 200ms P95 for standard API operations
 
 ### **Availability & Reliability**
 - **Uptime Target**: 99.9% (8.76 hours downtime/year)
-- **Recovery Time**: <5 minutes for service restoration
+- **Recovery Time**: Under 5 minutes for service restoration
 - **Data Backup**: Automated daily backups with point-in-time recovery
 - **Disaster Recovery**: Multi-region deployment capability
 

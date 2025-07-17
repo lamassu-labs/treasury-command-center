@@ -220,7 +220,7 @@ Organizations managing digital treasuries across multiple blockchains face:
 ## 🎨 Non-Functional Requirements
 
 ### **Performance Requirements**
-- **NFR-001**: System must support <2 second response times for dashboard loading
+- **NFR-001**: System must support under 2 second response times for dashboard loading
 - **NFR-002**: Real-time data updates must occur within 30 seconds of blockchain confirmation
 - **NFR-003**: System must support 1,000+ concurrent users without performance degradation
 - **NFR-004**: API endpoints must handle 10,000+ requests per minute

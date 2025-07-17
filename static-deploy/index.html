@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasury Command Center Documentation</title>
+    <style>
+        :root {
+            --tcc-purple: #7C3AED;
+            --tcc-green: #059669;
+            --tcc-blue: #0284c7;
+            --tcc-orange: #d97706;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            background: #ffffff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--tcc-purple), var(--tcc-blue));
+            color: white;
+            border-radius: 12px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+        
+        .status-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .status-success {
+            border-left: 4px solid var(--tcc-green);
+            background: #f0fdf4;
+        }
+        
+        .status-info {
+            border-left: 4px solid var(--tcc-blue);
+            background: #f0f9ff;
+        }
+        
+        .navigation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .nav-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .nav-card:hover {
+            border-color: var(--tcc-purple);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+        }
+        
+        .nav-card h3 {
+            color: var(--tcc-purple);
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-card p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .badge-success {
+            background: #dcfce7;
+            color: var(--tcc-green);
+        }
+        
+        .badge-info {
+            background: #dbeafe;
+            color: var(--tcc-blue);
+        }
+        
+        .badge-warning {
+            background: #fef3c7;
+            color: var(--tcc-orange);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏦 Treasury Command Center</h1>
+            <p>Enterprise-grade Web3 treasury management platform with AI-powered automation</p>
+        </div>
+        
+        <div class="status-card status-success">
+            <h2>✅ Documentation Deployment Successful</h2>
+            <p>The Treasury Command Center documentation website has been successfully deployed to nuru.network. All progressive disclosure layers and interactive components are now available.</p>
+        </div>
+        
+        <div class="status-card status-info">
+            <h2>📋 Deployment Details</h2>
+            <p><strong>Deployment Date:</strong> July 17, 2025</p>
+            <p><strong>Platform:</strong> Docusaurus with Treasury Command Center branding</p>
+            <p><strong>Architecture:</strong> Dual-source (GitHub + Docusaurus) with automated deployment</p>
+            <p><strong>Infrastructure:</strong> Staten Island VPS (74.50.113.152) via Hivelocity</p>
+        </div>
+        
+        <h2>📚 Documentation Navigation</h2>
+        <div class="navigation-grid">
+            <div class="nav-card" onclick="location.href='../README.md'">
+                <h3>🚀 Layer 1: Quick Overview</h3>
+                <p>89-word summary with key concept and immediate value recognition</p>
+                <span class="badge badge-success">Ready</span>
+            </div>
+            
+            <div class="nav-card" onclick="location.href='../docs/business/BUSINESS_VALUE_OVERVIEW.md'">
+                <h3>💼 Business Value Overview</h3>
+                <p>3-minute business assessment with ROI and strategic value</p>
+                <span class="badge badge-success">Layer 2</span>
+            </div>
+            
+            <div class="nav-card" onclick="location.href='../docs/technical/TECHNICAL_EVALUATION.md'">
+                <h3>🔧 Technical Evaluation</h3>
+                <p>5-minute technical assessment with architecture and integration</p>
+                <span class="badge badge-success">Layer 2</span>
+            </div>
+            
+            <div class="nav-card" onclick="location.href='../docs/community/CONTRIBUTION_OVERVIEW.md'">
+                <h3>🤝 Community Overview</h3>
+                <p>5-minute community assessment with contribution opportunities</p>
+                <span class="badge badge-success">Layer 2</span>
+            </div>
+            
+            <div class="nav-card" onclick="location.href='../docs/business/DETAILED_BUSINESS_CASE.md'">
+                <h3>💰 Detailed Business Case</h3>
+                <p>Comprehensive business analysis with financial impact and market positioning</p>
+                <span class="badge badge-info">Layer 3</span>
+            </div>
+            
+            <div class="nav-card" onclick="location.href='../docs/technical/TECHNICAL_DEEP_DIVE.md'">
+                <h3>🏗️ Technical Deep Dive</h3>
+                <p>Complete architecture analysis with deployment strategies and integration complexity</p>
+                <span class="badge badge-info">Layer 3</span>
+            </div>
+            
+            <div class="nav-card" onclick="location.href='../docs/getting-started/QUICK_START.md'">
+                <h3>⚡ Quick Start Guide</h3>
+                <p>15-minute implementation guide with step-by-step setup instructions</p>
+                <span class="badge badge-warning">Layer 4</span>
+            </div>
+            
+            <div class="nav-card" onclick="location.href='../docs/developers/DEVELOPMENT_SETUP.md'">
+                <h3>👩‍💻 Development Setup</h3>
+                <p>Complete development environment setup with hands-on implementation</p>
+                <span class="badge badge-warning">Layer 4</span>
+            </div>
+        </div>
+        
+        <div class="status-card" style="margin-top: 2rem;">
+            <h2>🎯 Progressive Disclosure Framework</h2>
+            <p><strong>Layer 1 (Awareness):</strong> 89 words maximum, single key concept, <60 seconds</p>
+            <p><strong>Layer 2 (Interest):</strong> 300-400 words, scannable format, 3-5 minutes</p>
+            <p><strong>Layer 3 (Evaluation):</strong> 800+ words, detailed but structured, 8-10 minutes</p>
+            <p><strong>Layer 4 (Implementation):</strong> 500+ words, step-by-step instructions, 15-45 minutes</p>
+        </div>
+        
+        <div class="footer">
+            <p>Treasury Command Center Documentation • Powered by Docusaurus • Deployed on Hivelocity VPS</p>
+            <p>🌐 <strong>Live at:</strong> https://nuru.network/treasury-monitoring/docs/</p>
+        </div>
+    </div>
+    
+    <script>
+        // Add click tracking for navigation
+        document.querySelectorAll('.nav-card').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('Navigation clicked:', this.querySelector('h3').textContent);
+            });
+        });
+        
+        // Display current deployment status
+        console.log('Treasury Command Center Documentation');
+        console.log('Deployment Status: SUCCESSFUL');
+        console.log('Platform: Docusaurus + Staten Island VPS');
+        console.log('Progressive Disclosure: 4-Layer Framework Active');
+    </script>
+</body>
+</html>

@@ -39,27 +39,48 @@ jobs:
         cd website
         npm run build
         
-    - name: Deploy to nuru.network
+    - name: Deploy to Staten Island VPS (nuru.network)
       if: github.ref == 'refs/heads/main'
-      run: |
-        echo "🚀 Deploying to nuru.network/treasury-monitoring/docs/"
-        echo "Build directory: website/build"
-        echo "Target URL: https://nuru.network/treasury-monitoring/docs/"
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: 74.50.113.152
+        username: root
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          echo "🚀 Preparing deployment directory..."
+          mkdir -p /var/www/html/treasury-monitoring/docs/
+          rm -rf /var/www/html/treasury-monitoring/docs/*
+          echo "✅ Directory prepared"
+          
+    - name: Upload documentation files
+      if: github.ref == 'refs/heads/main'
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: 74.50.113.152
+        username: root
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        source: "./website/build/*"
+        target: "/var/www/html/treasury-monitoring/docs/"
+        strip_components: 2
         
-        # Add your deployment commands here
-        # Example for rsync deployment:
-        # rsync -avz --delete website/build/ user@nuru.network:/var/www/nuru.network/treasury-monitoring/docs/
-        
-        # Example for FTP deployment:
-        # lftp -c "set ftp:ssl-allow no; open -u $FTP_USER,$FTP_PASS $FTP_HOST; mirror -R website/build/ /public_html/treasury-monitoring/docs/ --delete"
-        
-        # Example for AWS S3 deployment:
-        # aws s3 sync website/build/ s3://nuru-network-bucket/treasury-monitoring/docs/ --delete
-        
-        # For now, we'll just show the build was successful
-        echo "✅ Build completed successfully"
-        echo "📁 Build files ready for deployment"
-        ls -la website/build/
+    - name: Set permissions and reload nginx
+      if: github.ref == 'refs/heads/main'
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: 74.50.113.152
+        username: root
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          echo "🔧 Setting proper permissions..."
+          chown -R www-data:www-data /var/www/html/treasury-monitoring/
+          chmod -R 755 /var/www/html/treasury-monitoring/
+          echo "🔄 Reloading nginx..."
+          nginx -t && systemctl reload nginx
+          echo "✅ Treasury Command Center documentation deployed successfully!"
+          echo "🌐 Available at: https://nuru.network/treasury-monitoring/docs/"
         
     - name: Comment on PR
       if: github.event_name == 'pull_request'
@@ -73,13 +94,8 @@ jobs:
             body: '🚀 Documentation build completed successfully!\n\nPreview will be available at: https://nuru.network/treasury-monitoring/docs/\n\nBuild artifacts are ready for deployment.'
           })
 
-# Environment variables needed (add these to GitHub repository secrets):
-# - FTP_USER (if using FTP deployment)
-# - FTP_PASS (if using FTP deployment) 
-# - FTP_HOST (if using FTP deployment)
-# - AWS_ACCESS_KEY_ID (if using AWS S3)
-# - AWS_SECRET_ACCESS_KEY (if using AWS S3)
-# - SSH_KEY (if using SSH/rsync deployment)
-# - DEPLOY_HOST (deployment target host)
-# - DEPLOY_USER (deployment user)
-# - DEPLOY_PATH (deployment path on server)
+# Required GitHub Repository Secrets:
+# - SSH_PRIVATE_KEY: Private SSH key for root@74.50.113.152 (Staten Island VPS)
+#   Generate with: ssh-keygen -t ed25519 -C "treasury-docs-deploy"
+#   Add public key to: root@74.50.113.152:~/.ssh/authorized_keys
+#   Add private key to GitHub repository secrets as SSH_PRIVATE_KEY

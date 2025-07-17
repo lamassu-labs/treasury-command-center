@@ -81,7 +81,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'doc',
-          id: 'COMPREHENSIVE_DOCUMENTATION_INDEX',
+          id: 'README',
           label: '🗂️ Complete Documentation Index',
         },
       ],

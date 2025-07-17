@@ -53,7 +53,7 @@
 - **Progressive Disclosure**: Information complexity increases appropriately
 - **Mobile-Optimized**: 90%+ mobile experience across all documents
 - **Accessibility**: WCAG 2.1 AA compliance maintained
-- **Performance**: <2 seconds load time for optimal user experience
+- **Performance**: Less than 2 seconds load time for optimal user experience
 
 ## 🎯 **Quick Navigation**
 
