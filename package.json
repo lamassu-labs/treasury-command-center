@@ -80,7 +80,7 @@
     "ethers": "^6.8.0",
     "web3": "^4.2.0",
     "redis": "^4.6.0",
-    "jose": "^5.1.0"
+    "jose": "^6.0.12"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
