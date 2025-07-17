@@ -1,10 +1,132 @@
 # Treasury Command Center Documentation
 
-Welcome to the comprehensive documentation for Treasury Command Center - the open-source unified Web3 treasury management platform.
+<div style="text-align: center; margin: 2rem 0;">
 
-## 📚 Documentation Overview
+**Comprehensive documentation for the open-source unified Web3 treasury management platform**
 
-This documentation is organized into several key sections to help you understand, deploy, and contribute to Treasury Command Center.
+</div>
+
+<div style="background-color: #f3f0ff; border-left: 4px solid #7C3AED; padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px;">
+
+## 📚 **Documentation Philosophy**
+
+**Progressive Disclosure Navigation** - This documentation is architected with progressive disclosure principles to guide you from initial awareness to deep expertise. Find exactly what you need, when you need it.
+
+<p style="margin-top: 1rem; font-size: 0.9em; color: #6B7280;"><em>Choose your path based on your role and immediate goals - from 3-minute business overview to comprehensive technical mastery</em></p>
+
+</div>
+
+## 🚀 **Start Your Journey**
+
+<div style="background-color: #f0f9ff; border-left: 4px solid #0284c7; padding: 1rem; margin: 1rem 0;">
+
+**🎯 Persona-Driven Experience**: Each path is optimized for specific roles with appropriate depth, terminology, and action items for your responsibilities.
+
+</div>
+
+<div align="center">
+
+### **Choose Your Role-Based Documentation Path**
+*Tailored information architecture for optimal learning efficiency*
+
+</div>
+
+<table>
+<tr>
+<td width="50%">
+
+### 💼 **Business & Strategic Path**
+*For executives, decision makers, and business stakeholders*
+
+#### **⚡ Quick Start (3 minutes)**
+- 📊 **[Business Value Overview](business/BUSINESS_VALUE_OVERVIEW.md)** - ROI and competitive advantages
+- 🎯 **[Market Opportunity](business/MARKET_OPPORTUNITY.md)** - Market analysis and positioning
+- 💰 **[Cost-Benefit Analysis](business/COST_BENEFIT_ANALYSIS.md)** - Financial impact assessment
+
+#### **📋 Deep Dive (15 minutes)**
+- 📈 **[Product Requirements](product/TREASURY_COMMAND_CENTER_PRD.md)** - Complete product specification
+- 🏆 **[Competitive Analysis](business/COMPETITIVE_ANALYSIS.md)** - Market differentiation
+- 🛣️ **[Implementation Roadmap](business/IMPLEMENTATION_ROADMAP.md)** - Timeline and resources
+
+#### **🎯 Decision Making (30 minutes)**
+- ⚖️ **[Risk Assessment](business/RISK_ASSESSMENT.md)** - Implementation risks and mitigation
+- 🚀 **[Pilot Program Guide](business/PILOT_PROGRAM.md)** - Start with a controlled trial
+- 📞 **[Enterprise Consultation](business/ENTERPRISE_CONSULTATION.md)** - Custom evaluation support
+
+</td>
+<td width="50%">
+
+### 🔧 **Technical & Implementation Path**
+*For developers, architects, and technical teams*
+
+#### **⚡ Quick Start (5 minutes)**
+- 🏗️ **[Technical Overview](technical/TECHNICAL_EVALUATION.md)** - Architecture and technical fit
+- 🔒 **[Security Assessment](technical/SECURITY_OVERVIEW.md)** - Security model and compliance
+- 📡 **[Integration Guide](integration/INTEGRATION_OVERVIEW.md)** - API and system integration
+
+#### **🛠️ Hands-On (30 minutes)**
+- ⚡ **[Quick Start Guide](getting-started/QUICK_START.md)** - 15-minute local setup
+- 👩‍💻 **[Development Setup](developers/DEVELOPMENT_SETUP.md)** - Complete dev environment
+- 📖 **[Getting Started Tutorial](tutorials/basic-usage/GETTING_STARTED_TUTORIAL.md)** - First wallet setup
+
+#### **🏗️ Deep Implementation (2+ hours)**
+- 🔧 **[Architecture Overview](technical/ARCHITECTURE_OVERVIEW.md)** - System design deep dive
+- 🚀 **[Production Deployment](deployment/PRODUCTION_DEPLOYMENT.md)** - Enterprise deployment
+- 🔗 **[Multi-Chain Setup](integration/blockchain/MULTI_CHAIN_SETUP.md)** - Blockchain integration
+- 📚 **[API Reference](api/)** - Complete API documentation
+
+</td>
+</tr>
+</table>
+
+---
+
+<table>
+<tr>
+<td width="50%">
+
+### 👥 **Community & Contribution Path**
+*For open source enthusiasts and contributors*
+
+#### **⚡ Quick Start (5 minutes)**
+- 🌟 **[Contribution Overview](community/CONTRIBUTION_OVERVIEW.md)** - Ways to get involved
+- 🎯 **[First Contribution Guide](community/FIRST_CONTRIBUTION.md)** - Easy wins for newcomers
+- 💬 **[Community Guidelines](../CONTRIBUTING.md)** - Communication and collaboration
+
+#### **🤝 Getting Involved (30 minutes)**
+- 🛠️ **[Development Workflow](developers/DEVELOPMENT_SETUP.md)** - Code contribution process
+- 📝 **[Documentation Contribution](community/DOCUMENTATION_CONTRIBUTION.md)** - Improve docs
+- 🐛 **[Bug Reports & Features](community/BUG_REPORTS_FEATURES.md)** - Issue reporting
+
+#### **🏆 Leadership (Ongoing)**
+- 👑 **[Community Leadership](community/COMMUNITY_LEADERSHIP.md)** - Lead initiatives
+- 📢 **[Community Events](community/COMMUNITY_EVENTS.md)** - Organize and participate
+- 🎤 **[Speaking & Advocacy](community/SPEAKING_ADVOCACY.md)** - Represent the project
+
+</td>
+<td width="50%">
+
+### 🎓 **Learning & Mastery Path**
+*For ongoing education and advanced usage*
+
+#### **⚡ Fundamentals (15 minutes)**
+- 📚 **[Core Concepts](tutorials/fundamentals/CORE_CONCEPTS.md)** - Treasury management basics
+- 🔗 **[Blockchain Basics](tutorials/fundamentals/BLOCKCHAIN_BASICS.md)** - Multi-chain concepts
+- 💰 **[DeFi Integration](tutorials/fundamentals/DEFI_INTEGRATION.md)** - DeFi protocol understanding
+
+#### **🚀 Advanced Usage (1+ hours)**
+- 🔧 **[Advanced Configuration](tutorials/advanced/ADVANCED_CONFIGURATION.md)** - Custom setups
+- 🤖 **[AI Agent Automation](tutorials/advanced/AI_AGENT_AUTOMATION.md)** - Intelligent automation
+- 📊 **[Analytics & Reporting](tutorials/advanced/ANALYTICS_REPORTING.md)** - Business intelligence
+
+#### **🏆 Expert Level (Ongoing)**
+- 🔬 **[Use Cases](tutorials/use-cases/)** - Real-world implementations
+- 🛡️ **[Security Best Practices](tutorials/advanced/SECURITY_GUIDE.md)** - Enterprise security
+- 🌐 **[Enterprise Integration](tutorials/enterprise/ENTERPRISE_INTEGRATION.md)** - Large-scale deployment
+
+</td>
+</tr>
+</table>
 
 ## 🏢 Business Process & Value Proposition
 
