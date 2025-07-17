@@ -1,0 +1,139 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+        python-version: [3.9, 3.10, 3.11]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Node.js dependencies
+      run: |
+        if [ -f package.json ]; then
+          npm ci
+        else
+          echo "No package.json found, skipping Node.js dependencies"
+        fi
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then
+          pip install -r requirements.txt
+        fi
+        if [ -f requirements-dev.txt ]; then
+          pip install -r requirements-dev.txt
+        fi
+
+    - name: Run linting
+      run: |
+        # Node.js linting
+        if [ -f package.json ] && npm list --depth=0 | grep -q eslint; then
+          npm run lint
+        fi
+        
+        # Python linting
+        if command -v ruff &> /dev/null; then
+          ruff check .
+        elif command -v flake8 &> /dev/null; then
+          flake8 .
+        fi
+
+    - name: Run type checking
+      run: |
+        # TypeScript type checking
+        if [ -f tsconfig.json ]; then
+          npx tsc --noEmit
+        fi
+        
+        # Python type checking
+        if command -v mypy &> /dev/null; then
+          mypy .
+        fi
+
+    - name: Run tests
+      run: |
+        # Node.js tests
+        if [ -f package.json ] && grep -q '"test"' package.json; then
+          npm test
+        fi
+        
+        # Python tests
+        if command -v pytest &> /dev/null; then
+          pytest
+        elif [ -f manage.py ]; then
+          python manage.py test
+        fi
+
+    - name: Run security checks
+      run: |
+        # Node.js security audit
+        if [ -f package.json ]; then
+          npm audit --audit-level high
+        fi
+        
+        # Python security check
+        if command -v safety &> /dev/null; then
+          safety check
+        fi
+
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Check documentation links
+      run: |
+        # Install markdown link checker
+        npm install -g markdown-link-check
+        
+        # Check all markdown files
+        find . -name "*.md" -not -path "./node_modules/*" -exec markdown-link-check {} \;
+
+    - name: Validate documentation structure
+      run: |
+        # Check for required documentation files
+        required_files=("README.md" "CONTRIBUTING.md" "LICENSE")
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "Required file $file is missing"
+            exit 1
+          fi
+        done
+        
+        # Check for required documentation directories
+        required_dirs=("docs")
+        for dir in "${required_dirs[@]}"; do
+          if [ ! -d "$dir" ]; then
+            echo "Required directory $dir is missing"
+            exit 1
+          fi
+        done

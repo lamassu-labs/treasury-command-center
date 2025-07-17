@@ -1,0 +1,111 @@
+name: Security
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run security checks weekly on Sundays at 00:00 UTC
+    - cron: '0 0 * * 0'
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        # Install Node.js dependencies if package.json exists
+        if [ -f package.json ]; then
+          npm ci
+        fi
+        
+        # Install Python dependencies
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then
+          pip install -r requirements.txt
+        fi
+
+    - name: Run Node.js security audit
+      if: hashFiles('package.json') != ''
+      run: |
+        npm audit --audit-level high || true
+        npm audit --json > npm-audit-results.json || true
+
+    - name: Run Python security checks
+      run: |
+        # Install security tools
+        pip install safety bandit
+        
+        # Check for known vulnerabilities in dependencies
+        safety check --json --output safety-results.json || true
+        
+        # Run static security analysis
+        bandit -r . -f json -o bandit-results.json || true
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/init@v3
+      with:
+        languages: javascript, python
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+
+    - name: Upload security scan results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: security-scan-results
+        path: |
+          npm-audit-results.json
+          safety-results.json
+          bandit-results.json
+
+  dependency-review:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Dependency Review
+      uses: actions/dependency-review-action@v4
+      with:
+        fail-on-severity: high
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Run TruffleHog
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+        extra_args: --debug --only-verified
