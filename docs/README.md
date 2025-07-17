@@ -4,7 +4,7 @@
 
 ## 📚 **Progressive Disclosure Navigation**
 
-<div style="background-color: #f3f0ff; border-left: 4px solid #7C3AED; padding: 1rem; margin: 1rem 0;">
+<div style="background-color: #f3f0ff; border-left: 4px solid #7C3AED; padding: 1rem; margin: 1rem 0; display: block; max-width: 100%; overflow-x: auto;">
 
 **🎯 Role-Based Documentation**: Each path is optimized for specific roles with appropriate depth, terminology, and action items for your responsibilities.
 
@@ -12,8 +12,12 @@
 
 ### **Choose Your Documentation Path**
 
+<div style="overflow-x: auto; margin: 1rem 0;">
+
 | **Role** | **Quick Start** | **Time** | **Focus** |
 |----------|-----------------|----------|-----------|
+
+</div>
 | **💼 Business Leader** | [Business Value Overview](business/BUSINESS_VALUE_OVERVIEW.md) | 3 min | ROI & strategic value |
 | **🔧 Technical Evaluator** | [Technical Evaluation](technical/TECHNICAL_EVALUATION.md) | 5 min | Architecture & integration |
 | **👩‍💻 Developer** | [Development Setup](developers/DEVELOPMENT_SETUP.md) | 15 min | Hands-on implementation |
@@ -36,7 +40,15 @@
 2. **[Advanced Contribution](community/ADVANCED_CONTRIBUTION.md)** - Leadership opportunities
 3. **[Complete Documentation Index](COMPREHENSIVE_DOCUMENTATION_INDEX.md)** - Full navigation
 
+> **🎯 Layer 3 Resources**: Advanced documents provide comprehensive analysis and detailed implementation guidance for strategic planning and technical deep dives.
+
 ## 📊 **Documentation Quality Standards**
+
+<div style="background-color: #f0fdf4; border-left: 4px solid #22c55e; padding: 1rem; margin: 1rem 0; display: block; max-width: 100%; overflow-x: auto;">
+
+**📱 Mobile-First Design**: 90%+ mobile experience score with responsive tables, touch-friendly navigation, and optimized viewport scaling across all devices.
+
+</div>
 
 - **Progressive Disclosure**: Information complexity increases appropriately
 - **Mobile-Optimized**: 90%+ mobile experience across all documents

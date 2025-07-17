@@ -4,7 +4,7 @@
 
 ## 🎯 **The Business Challenge**
 
-<div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 1rem; margin: 1rem 0;">
+<div style="background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 1rem; margin: 1rem 0; display: block; max-width: 100%; overflow-x: auto;">
 
 **💸 Treasury Management Crisis**: Organizations managing $10M+ digital treasuries spend **40% of time on manual processes** across **5+ fragmented tools**, resulting in **$265K annual costs** and significant compliance risk.
 
@@ -16,8 +16,12 @@
 
 ### **Immediate Value Delivery**
 
+<div style="overflow-x: auto; margin: 1rem 0;">
+
 | **Challenge** | **Solution** | **Business Impact** |
 |---------------|--------------|---------------------|
+
+</div>
 | **Tool Fragmentation** | Unified dashboard | **70% operational reduction** |
 | **Manual Reporting** | Automated compliance | **20+ hours saved** weekly |
 | **Limited Visibility** | Real-time monitoring | **Immediate risk detection** |
@@ -63,6 +67,8 @@
 1. **[Technical Assessment](../technical/TECHNICAL_EVALUATION.md)** - 5-minute architecture validation
 2. **[Detailed Business Case](DETAILED_BUSINESS_CASE.md)** - Complete ROI analysis and implementation plan
 3. **[Schedule Demo](mailto:demo@treasury-command-center.com)** - Live platform walkthrough
+
+> **📈 Layer 3 Deep Dive**: [Detailed Business Case](DETAILED_BUSINESS_CASE.md) provides comprehensive financial impact analysis, competitive positioning, and implementation strategy for strategic planning.
 
 ---
 

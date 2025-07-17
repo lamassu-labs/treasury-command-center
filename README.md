@@ -21,6 +21,10 @@
 
 </div>
 
+<div style="display: block; max-width: 100%; overflow-x: auto;">
+<p><strong>Mobile-Optimized Experience</strong> - All documentation designed for 90%+ mobile experience with responsive design and touch-friendly navigation.</p>
+</div>
+
 ## 🎯 **Perfect For**
 
 <div style="background-color: #f0f9ff; border-left: 4px solid #0284c7; padding: 1rem; margin: 1rem 0;">

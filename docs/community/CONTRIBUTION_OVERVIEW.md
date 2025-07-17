@@ -4,7 +4,7 @@
 
 ## 🌟 **Welcome to the Treasury Command Center Community!**
 
-<div style="background-color: #f0f9ff; border-left: 4px solid #0284c7; padding: 1rem; margin: 1rem 0;">
+<div style="background-color: #f0f9ff; border-left: 4px solid #0284c7; padding: 1rem; margin: 1rem 0; display: block; max-width: 100%; overflow-x: auto;">
 
 **💡 Impact at Scale**: Your contributions directly benefit organizations managing billions in digital assets across the global Web3 ecosystem.
 
@@ -26,7 +26,7 @@ Treasury Command Center is built by and for the Web3 treasury management communi
 
 ## 🏆 **Recognition & Benefits**
 
-<div style="background-color: #fef3f2; border-left: 4px solid #ef4444; padding: 1rem; margin: 1rem 0;">
+<div style="background-color: #fef3f2; border-left: 4px solid #ef4444; padding: 1rem; margin: 1rem 0; display: block; max-width: 100%; overflow-x: auto;">
 
 **🚨 High-Value Skills**: Treasury management + Web3 + Open source = **Top 1% developer profile**
 
@@ -50,6 +50,8 @@ Treasury Command Center is built by and for the Web3 treasury management communi
 1. **[First Contribution Guide](FIRST_CONTRIBUTION.md)** - 30-minute onboarding experience
 2. **[Development Setup](../developers/DEVELOPMENT_SETUP.md)** - Complete development environment
 3. **[Advanced Contribution](ADVANCED_CONTRIBUTION.md)** - Leadership and governance opportunities
+
+> **👥 Layer 3 Community Deep Dive**: [Advanced Contribution](ADVANCED_CONTRIBUTION.md) provides comprehensive governance structure, leadership pathways, and detailed contribution processes for community engagement.
 
 ### **Community Channels**
 - **Discord**: Real-time community chat and support

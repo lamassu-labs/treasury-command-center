@@ -4,7 +4,7 @@
 
 ## 🏗️ **Architecture Overview**
 
-<div style="background-color: #f3f0ff; border-left: 4px solid #7C3AED; padding: 1rem; margin: 1rem 0;">
+<div style="background-color: #f3f0ff; border-left: 4px solid #7C3AED; padding: 1rem; margin: 1rem 0; display: block; max-width: 100%; overflow-x: auto;">
 
 **🛠️ Modern Stack**: Enterprise-grade architecture built with React 18, Next.js 14, Node.js/Python APIs, PostgreSQL 15, and Kubernetes-native deployment for scalability and security.
 
@@ -20,8 +20,12 @@
 
 ### **Technical Fit Evaluation**
 
+<div style="overflow-x: auto; margin: 1rem 0;">
+
 | **Requirement** | **Treasury Command Center** | **Compatibility** |
 |-----------------|----------------------------|-------------------|
+
+</div>
 | **Container Platform** | Kubernetes-native | ✅ **Excellent** |
 | **Database Systems** | PostgreSQL + Redis | ✅ **Standard** |
 | **API Architecture** | REST + OpenAPI | ✅ **Industry Standard** |
@@ -65,6 +69,8 @@
 1. **[Technical Deep Dive](TECHNICAL_DEEP_DIVE.md)** - Complete architecture and implementation details
 2. **[Development Setup](../developers/DEVELOPMENT_SETUP.md)** - Local environment in 30 minutes
 3. **[Production Deployment](../deployment/PRODUCTION_DEPLOYMENT.md)** - Enterprise deployment guide
+
+> **🔬 Layer 3 Technical Deep Dive**: [Technical Deep Dive](TECHNICAL_DEEP_DIVE.md) provides comprehensive architecture analysis, deployment strategies, and integration complexity assessment for technical planning.
 
 ---
 
