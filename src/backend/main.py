@@ -10,7 +10,8 @@ import sys
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
-sys.path.append("/Users/eladm/Projects/token/tokenhunter")
+# Add project root to path for local imports
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import logging
 
