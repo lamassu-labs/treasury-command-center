@@ -336,6 +336,85 @@ docker-compose -f docker-compose.prod.yml up -d
 
 </div>
 
+## 📁 **Project Structure**
+
+```
+treasury-command-center/
+├── docs/                   # Documentation
+│   ├── business/          # Business requirements & strategy
+│   ├── product/           # Product specifications & PRDs
+│   ├── technical/         # Technical documentation
+│   ├── architecture/      # System architecture
+│   ├── deployment/        # Deployment guides
+│   └── api/              # API documentation
+├── src/                   # Source code
+│   ├── components/        # React components
+│   ├── hooks/            # Custom React hooks
+│   ├── services/         # API services
+│   ├── utils/            # Utility functions
+│   └── types/            # TypeScript types
+├── working/              # Development workspace
+│   ├── prototypes/       # Feature prototypes
+│   ├── experiments/      # Research experiments
+│   └── migrations/       # Data migrations
+├── tools/                # Development tools
+│   ├── scripts/          # Automation scripts
+│   ├── testing/          # Testing utilities
+│   ├── development/      # Dev environment setup
+│   └── monitoring/       # Production monitoring
+└── tests/                # Test suites
+    ├── unit/             # Unit tests
+    ├── integration/      # Integration tests
+    ├── e2e/              # End-to-end tests
+    └── performance/      # Performance tests
+```
+
+## 🏗️ **Technology Stack Details**
+
+### **Frontend Architecture**
+- **Framework**: Next.js 14 with App Router
+- **UI**: React 18 + TypeScript 5
+- **Styling**: Tailwind CSS 3 + Shadcn/UI
+- **State Management**: Zustand + React Query
+- **Authentication**: Auth0 + Internet Identity
+
+### **Backend Architecture**
+- **API Framework**: Node.js + Express + TypeScript
+- **Database**: PostgreSQL 15 + Prisma ORM
+- **Cache Layer**: Redis 6 + Bull Queue
+- **Authentication**: JWT + OAuth2
+- **Real-time**: WebSockets + Server-Sent Events
+
+### **Infrastructure Stack**
+- **Deployment**: Docker + Kubernetes
+- **Monitoring**: Prometheus + Grafana + Jaeger
+- **CI/CD**: GitHub Actions + GitOps
+- **Security**: HashiCorp Vault + SSL/TLS
+- **Observability**: OpenTelemetry + Logs aggregation
+
+## 🛣️ **Development Roadmap**
+
+### **Phase 1: Foundation (Q3 2025)**
+- ✅ Unified authentication and dashboard
+- ✅ Multi-chain portfolio tracking
+- ✅ Basic stablecoin monitoring
+- ✅ Core alerting system
+- ✅ API-first architecture
+
+### **Phase 2: Intelligence (Q4 2025)**
+- 🔄 AI agent automation
+- 🔄 Advanced analytics and reporting
+- 🔄 Market intelligence integration
+- 🔄 Compliance reporting automation
+- 🔄 Real-time risk monitoring
+
+### **Phase 3: Scale (Q1 2026)**
+- 📋 Enterprise features and white-labeling
+- 📋 Additional blockchain integrations
+- 📋 DeFi protocol monitoring
+- 📋 Institutional trading integration
+- 📋 Advanced AI/ML capabilities
+
 ## 🚀 **Your Next Technical Steps**
 
 > **Based on your technical evaluation, choose your immediate next action:**

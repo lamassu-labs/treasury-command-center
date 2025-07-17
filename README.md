@@ -92,14 +92,14 @@
 
 ## 🚀 **Key Capabilities**
 
-| **Feature** | **Benefit** | **Enterprise Value** |
-|-------------|-------------|---------------------|
-| 🏢 **Enterprise Dashboard** | Unified interface for all treasury operations | **Replace 5+ tools** with single platform |
-| 💰 **Multi-Chain Portfolio** | Track assets across 10+ blockchain networks | **Complete visibility** of distributed treasury |
-| 🔄 **Stablecoin Intelligence** | Monitor 15+ stablecoins with stability metrics | **Risk mitigation** for treasury stability |
-| 🤖 **AI Agent Automation** | Automated risk detection and compliance alerts | **Prevent costly mistakes** and compliance failures |
-| 📊 **Intelligence Analytics** | Advanced reporting and market insights | **Data-driven decisions** with actionable intelligence |
-| 🔒 **Enterprise Security** | SOC2-compliant with role-based access control | **Institutional-grade** security and audit trails |
+| **Feature** | **Enterprise Value** |
+|-------------|---------------------|
+| 🏢 **Enterprise Dashboard** | **Replace 5+ tools** with single platform |
+| 💰 **Multi-Chain Portfolio** | **Complete visibility** of distributed treasury |
+| 🤖 **AI Agent Automation** | **Prevent costly mistakes** and compliance failures |
+| 📊 **Intelligence Analytics** | **Data-driven decisions** with actionable intelligence |
+
+> **💡 Learn More**: [Complete feature breakdown](docs/business/BUSINESS_VALUE_OVERVIEW.md) with ROI analysis and competitive advantages.
 
 ## 🚀 **Choose Your Journey**
 
@@ -231,139 +231,24 @@ You now have Treasury Command Center running locally.
 - 🔗 **[Multi-Chain Setup](docs/integration/blockchain/MULTI_CHAIN_SETUP.md)** - *Configure 10+ blockchain networks*
 - 📚 **[Complete Documentation](docs/)** - *All guides, references, and resources*
 
-## 📁 Project Structure
+## 📚 **Learn More**
 
-```
-treasury-command-center/
-├── docs/                   # Documentation
-│   ├── business/          # Business requirements & strategy
-│   ├── product/           # Product specifications & PRDs
-│   ├── technical/         # Technical documentation
-│   ├── architecture/      # System architecture
-│   ├── deployment/        # Deployment guides
-│   └── api/              # API documentation
-├── src/                   # Source code
-│   ├── components/        # React components
-│   ├── hooks/            # Custom React hooks
-│   ├── services/         # API services
-│   ├── utils/            # Utility functions
-│   └── types/            # TypeScript types
-├── working/              # Development workspace
-│   ├── prototypes/       # Feature prototypes
-│   ├── experiments/      # Research experiments
-│   └── migrations/       # Data migrations
-├── tools/                # Development tools
-│   ├── scripts/          # Automation scripts
-│   ├── testing/          # Testing utilities
-│   ├── development/      # Dev environment setup
-│   └── monitoring/       # Production monitoring
-└── tests/                # Test suites
-    ├── unit/             # Unit tests
-    ├── integration/      # Integration tests
-    ├── e2e/              # End-to-end tests
-    └── performance/      # Performance tests
-```
+| **Topic** | **Resource** | **Time** |
+|-----------|-------------|----------|
+| **📊 Business Value** | [Business Overview](docs/business/BUSINESS_VALUE_OVERVIEW.md) | 3 min |
+| **🏗️ Architecture** | [Technical Evaluation](docs/technical/TECHNICAL_EVALUATION.md) | 5 min |
+| **🤝 Contributing** | [Community Overview](docs/community/CONTRIBUTION_OVERVIEW.md) | 5 min |
+| **📖 Complete Docs** | [Documentation Hub](docs/README.md) | Browse |
 
-## 🏗️ Architecture
+## 🤝 **Contributing**
 
-### **Frontend Stack**
-- **Framework**: Next.js 14 with App Router
-- **UI**: React 18 + TypeScript 5
-- **Styling**: Tailwind CSS 3 + Shadcn/UI
-- **State**: Zustand + React Query
+We welcome contributions! Join our community of developers, treasury managers, and Web3 enthusiasts building the future of digital treasury management.
 
-### **Backend Stack**
-- **API**: Node.js + Express + TypeScript
-- **Database**: PostgreSQL 15 + Prisma ORM
-- **Cache**: Redis 6 + Bull Queue
-- **Auth**: Auth0 + Internet Identity
+**Quick Start**: [Community Overview](docs/community/CONTRIBUTION_OVERVIEW.md) | **Development**: [Development Setup](docs/developers/DEVELOPMENT_SETUP.md)
 
-### **Infrastructure**
-- **Deployment**: Docker + Kubernetes
-- **Monitoring**: Prometheus + Grafana
-- **CI/CD**: GitHub Actions
-- **Security**: Vault + SSL/TLS
+## 📜 **License**
 
-## 💰 Business Model
-
-### **Target Market**
-- **Enterprise DAOs** with significant digital treasuries
-- **Web3 Companies** managing multi-chain assets
-- **Investment Funds** with crypto exposure
-- **Traditional Enterprises** exploring digital assets
-
-### **Value Proposition**
-- **Unified Platform** - Single interface for all treasury operations
-- **Cost Efficiency** - Significant cost reduction vs. multiple vendors
-- **Security First** - Enterprise-grade security and compliance
-- **AI-Powered** - Automated risk detection and insights
-- **Open Source** - Community-driven development and transparency
-
-## 📊 Competitive Advantages
-
-1. **Only Open-Source Unified Platform** - All major blockchains in single interface
-2. **AI Integration** - Automated risk detection and compliance
-3. **Real-time Intelligence** - Direct node connections for immediate data
-4. **Zero Vendor Lock-in** - Open source with flexible deployment options
-5. **Community-Driven** - Collaborative development and feature evolution
-
-## 🛣️ Roadmap
-
-### **Phase 1: Foundation (Q3 2025)**
-- ✅ Unified authentication and dashboard
-- ✅ Multi-chain portfolio tracking
-- ✅ Basic stablecoin monitoring
-- ✅ Core alerting system
-
-### **Phase 2: Intelligence (Q4 2025)**
-- 🔄 AI agent automation
-- 🔄 Advanced analytics and reporting
-- 🔄 Market intelligence integration
-- 🔄 Compliance reporting automation
-
-### **Phase 3: Scale (Q1 2026)**
-- 📋 Enterprise features and white-labeling
-- 📋 Additional blockchain integrations
-- 📋 DeFi protocol monitoring
-- 📋 Institutional trading integration
-
-## 🤝 Contributing
-
-We welcome contributions from the community! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get involved.
-
-### **Ways to Contribute**
-- 🐛 Bug reports and fixes
-- ✨ Feature requests and implementations
-- 📚 Documentation improvements
-- 🧪 Testing and quality assurance
-- 🎨 UI/UX design enhancements
-
-### **Development Process**
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests and documentation
-5. Submit a pull request
-
-## 👥 Community
-
-### **Communication Channels**
-- **GitHub Discussions** - Feature requests and general discussion
-- **Discord** - Real-time community chat
-- **Weekly Calls** - Community development updates
-
-### **Governance**
-- **Core Team** - Architecture and strategic decisions
-- **Contributors** - Feature development and maintenance
-- **Community** - Feedback, testing, and feature requests
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-Special thanks to all contributors and the broader Web3 community for inspiration and support.
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 

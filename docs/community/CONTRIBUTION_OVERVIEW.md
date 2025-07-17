@@ -255,6 +255,33 @@ We follow the [Contributor Covenant Code of Conduct](https://contributor-covenan
 
 ---
 
+## 👥 **Community Structure & Governance**
+
+### **Community Roles**
+- **Core Team** - Architecture and strategic decisions
+- **Contributors** - Feature development and maintenance
+- **Community Members** - Feedback, testing, and feature requests
+- **Domain Experts** - Treasury management and DeFi expertise
+
+### **Communication Channels**
+- **GitHub Discussions** - Feature requests and general discussion
+- **Discord** - Real-time community chat and support
+- **Weekly Calls** - Community development updates and planning
+- **Monthly Meetups** - Technical deep dives and user stories
+
+### **Development Process**
+1. **Fork the repository** and create a feature branch
+2. **Make your changes** with appropriate tests and documentation
+3. **Submit a pull request** with clear description of changes
+4. **Code review** with community feedback and suggestions
+5. **Merge and release** with contributor recognition
+
+### **Governance Model**
+- **Transparent Decision Making** - All major decisions discussed publicly
+- **Community Input** - Feature requests and feedback drive development
+- **Consensus Building** - Major changes require community consensus
+- **Contributor Recognition** - All contributions celebrated and recognized
+
 ## 🌟 **Welcome to the Community!**
 
 **You're joining a community** of developers, treasury managers, DeFi experts, and Web3 enthusiasts building the future of digital treasury management. Whether you contribute code, documentation, design, or expertise, your participation makes Treasury Command Center better for everyone.
