@@ -1,0 +1,105 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* Treasury Command Center Theme Variables */
+:root {
+  --ifm-color-primary: #7C3AED;
+  --ifm-color-primary-dark: #6D28D9;
+  --ifm-color-primary-darker: #5B21B6;
+  --ifm-color-primary-darkest: #4C1D95;
+  --ifm-color-primary-light: #8B5CF6;
+  --ifm-color-primary-lighter: #A78BFA;
+  --ifm-color-primary-lightest: #C4B5FD;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(124, 58, 237, 0.1);
+  
+  /* Treasury Command Center Brand Colors */
+  --tcc-green: #059669;
+  --tcc-blue: #0284c7;
+  --tcc-orange: #d97706;
+  --tcc-red: #dc2626;
+  --tcc-purple: #7C3AED;
+  
+  /* Enhanced spacing for mobile */
+  --ifm-spacing-horizontal: 1rem;
+  --ifm-navbar-padding-horizontal: 1rem;
+}
+
+/* Treasury Command Center Dark Theme */
+[data-theme='dark'] {
+  --ifm-color-primary: #A78BFA;
+  --ifm-color-primary-dark: #8B5CF6;
+  --ifm-color-primary-darker: #7C3AED;
+  --ifm-color-primary-darkest: #6D28D9;
+  --ifm-color-primary-light: #C4B5FD;
+  --ifm-color-primary-lighter: #DDD6FE;
+  --ifm-color-primary-lightest: #EDE9FE;
+  --docusaurus-highlighted-code-line-bg: rgba(167, 139, 250, 0.3);
+}
+
+/* Progressive Disclosure Callouts */
+.tcc-callout {
+  border-left: 4px solid var(--ifm-color-primary);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  background-color: var(--ifm-color-primary-lightest);
+}
+
+.tcc-callout--business {
+  border-left-color: var(--tcc-green);
+  background-color: #f0fdf4;
+}
+
+.tcc-callout--technical {
+  border-left-color: var(--tcc-blue);
+  background-color: #f0f9ff;
+}
+
+.tcc-callout--community {
+  border-left-color: var(--tcc-orange);
+  background-color: #fefce8;
+}
+
+.tcc-callout--warning {
+  border-left-color: var(--tcc-red);
+  background-color: #fef2f2;
+}
+
+/* Mobile-first responsive tables */
+.tcc-table-container {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced mobile navigation */
+@media (max-width: 768px) {
+  .navbar__item {
+    margin: 0 0.25rem;
+  }
+  
+  .navbar__title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Progressive disclosure layer indicators */
+.layer-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  margin-left: 0.5rem;
+}
+
+.layer-badge--layer1 { background-color: var(--tcc-green); }
+.layer-badge--layer2 { background-color: var(--tcc-blue); }
+.layer-badge--layer3 { background-color: var(--tcc-purple); }
+.layer-badge--layer4 { background-color: var(--tcc-orange); }

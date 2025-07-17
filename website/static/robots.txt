@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+
+# Treasury Command Center Documentation
+# Sitemap location
+Sitemap: https://nuru.network/treasury-monitoring/docs/sitemap.xml
+
+# Optimize for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block access to admin/internal pages
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /build/
+Disallow: /src/
+
+# Allow all documentation content
+Allow: /docs/
+Allow: /business/
+Allow: /technical/
+Allow: /community/
+Allow: /getting-started/
+Allow: /developers/
+Allow: /api/
