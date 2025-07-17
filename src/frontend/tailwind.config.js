@@ -10,16 +10,16 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Nuru AI Brand Colors
+      // Treasury Command Center Brand Colors
       colors: {
         // Primary brand colors
-        'nuru-purple': {
+        'treasury-primary': {
           50: '#f3f0ff',
           100: '#e9e5ff',
           200: '#d6ceff',
           300: '#b8a6ff',
           400: '#9572ff',
-          500: '#7C3AED', // Primary Nuru Purple
+          500: '#7C3AED', // Primary Purple
           600: '#6d28d9',
           700: '#5b21b6',
           800: '#4c1d95',
@@ -28,7 +28,7 @@ module.exports = {
         },
 
         // Secondary accent colors
-        'nuru-accent': {
+        'treasury-accent': {
           50: '#fef3e6',
           100: '#fde4c8',
           200: '#fbc58d',
@@ -42,7 +42,7 @@ module.exports = {
         },
 
         // Trust/Security colors
-        'nuru-trust': {
+        'treasury-trust': {
           50: '#eff6ff',
           100: '#dbeafe',
           200: '#bfdbfe',
@@ -56,7 +56,7 @@ module.exports = {
         },
 
         // Neutral colors with warm tone
-        'nuru-neutral': {
+        'treasury-neutral': {
           50: '#FDFBF6',  // Warm white
           100: '#f9fafb',
           200: '#f3f4f6',
@@ -109,16 +109,16 @@ module.exports = {
 
       // Box shadows
       boxShadow: {
-        'nuru-sm': '0 1px 2px 0 rgb(124 58 237 / 0.05)',
-        'nuru-md': '0 4px 6px -1px rgb(124 58 237 / 0.1)',
-        'nuru-lg': '0 10px 15px -3px rgb(124 58 237 / 0.1)',
-        'nuru-xl': '0 20px 25px -5px rgb(124 58 237 / 0.1)',
+        'treasury-sm': '0 1px 2px 0 rgb(124 58 237 / 0.05)',
+        'treasury-md': '0 4px 6px -1px rgb(124 58 237 / 0.1)',
+        'treasury-lg': '0 10px 15px -3px rgb(124 58 237 / 0.1)',
+        'treasury-xl': '0 20px 25px -5px rgb(124 58 237 / 0.1)',
       },
 
       // Gradients
       backgroundImage: {
-        'nuru-gradient': 'linear-gradient(135deg, #7C3AED 0%, #C65D3C 100%)',
-        'nuru-gradient-light': 'linear-gradient(135deg, #f3f0ff 0%, #fef3e6 100%)',
+        'treasury-gradient': 'linear-gradient(135deg, #7C3AED 0%, #C65D3C 100%)',
+        'treasury-gradient-light': 'linear-gradient(135deg, #f3f0ff 0%, #fef3e6 100%)',
         'trust-gradient': 'linear-gradient(135deg, #1E40AF 0%, #7C3AED 100%)',
       },
 
@@ -154,20 +154,20 @@ module.exports = {
         '.text-balance': {
           'text-wrap': 'balance',
         },
-        '.nuru-focus': {
-          '@apply focus:outline-none focus:ring-2 focus:ring-nuru-purple-500 focus:ring-offset-2': {},
+        '.treasury-focus': {
+          '@apply focus:outline-none focus:ring-2 focus:ring-treasury-primary-500 focus:ring-offset-2': {},
         },
-        '.nuru-button-primary': {
-          '@apply bg-nuru-purple-500 hover:bg-nuru-purple-600 text-white font-medium py-2 px-4 rounded-lg transition-colors nuru-focus': {},
+        '.treasury-button-primary': {
+          '@apply bg-treasury-primary-500 hover:bg-treasury-primary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors treasury-focus': {},
         },
-        '.nuru-button-secondary': {
-          '@apply border border-nuru-purple-200 hover:bg-nuru-purple-50 text-nuru-purple-700 font-medium py-2 px-4 rounded-lg transition-colors nuru-focus': {},
+        '.treasury-button-secondary': {
+          '@apply border border-treasury-primary-200 hover:bg-treasury-primary-50 text-treasury-primary-700 font-medium py-2 px-4 rounded-lg transition-colors treasury-focus': {},
         },
-        '.nuru-card': {
-          '@apply bg-white rounded-xl shadow-nuru-md border border-nuru-neutral-200 p-6': {},
+        '.treasury-card': {
+          '@apply bg-white rounded-xl shadow-treasury-md border border-treasury-neutral-200 p-6': {},
         },
-        '.nuru-input': {
-          '@apply border border-nuru-neutral-300 rounded-lg px-3 py-2 text-sm nuru-focus placeholder:text-nuru-neutral-400': {},
+        '.treasury-input': {
+          '@apply border border-treasury-neutral-300 rounded-lg px-3 py-2 text-sm treasury-focus placeholder:text-treasury-neutral-400': {},
         },
       })
     },
