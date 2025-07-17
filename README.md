@@ -3,57 +3,23 @@
 <div align="center">
 
 ## 🎯 **The Only Open-Source Unified Web3 Treasury Platform**
-**Manage multi-chain assets, automate compliance, and gain intelligence insights in one enterprise-grade solution**
+
+**Replace 5+ vendor tools with one unified solution for multi-chain treasury management**
 
 [![Status](https://img.shields.io/badge/Status-Development-yellow.svg)](https://github.com/treasury-command-center/treasury-command-center)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Documentation](https://img.shields.io/badge/Docs-Complete-green.svg)](docs/)
 [![Community](https://img.shields.io/badge/Community-Active-brightgreen.svg)](CONTRIBUTING.md)
 
-### 🚀 **[Get Started in 15 Minutes](#-quick-start)** | 📊 **[View Live Demo](https://demo.treasury-command-center.com)** | 💼 **[Business Case](docs/business/MARKET_OPPORTUNITY.md)**
-
 </div>
-
----
-
-## ⚡ **Why Treasury Command Center?**
 
 <div style="background-color: #f3f0ff; border-left: 4px solid #7C3AED; padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px;">
 
-**🎯 Unique Value Proposition**: The only open-source platform that unifies Web3 treasury management across multiple blockchains with enterprise-grade security and AI-powered automation.
+**🎯 Key Concept**: Enterprise-grade platform for Web3 treasury management across multiple blockchains with AI-powered automation and open-source transparency.
 
-<p style="margin-top: 1rem; font-size: 0.9em; color: #6B7280;"><em>Replace 5+ vendor tools with one unified, transparent, community-driven solution</em></p>
+**Benefits**: <strong style="color: #059669;">70% operational reduction</strong> • <strong style="color: #1E40AF;">Complete portfolio visibility</strong> • <strong style="color: #7C3AED;">AI risk prevention</strong> • <strong style="color: #D97706;">Zero vendor lock-in</strong>
 
 </div>
-
-<table>
-<tr>
-<td width="25%" align="center">
-<h3>🎯 <strong>Unified Platform</strong></h3>
-<p>Replace 5+ tools with one solution.<br/>
-<strong style="color: #059669;">70% operational overhead reduction</strong></p>
-<p><small><em>Single dashboard for all treasury operations</em></small></p>
-</td>
-<td width="25%" align="center">
-<h3>🔗 <strong>Multi-Chain Native</strong></h3>
-<p>Monitor 10+ blockchains seamlessly.<br/>
-<strong style="color: #1E40AF;">Complete portfolio visibility</strong></p>
-<p><small><em>Ethereum, Polygon, Arbitrum, Optimism & more</em></small></p>
-</td>
-<td width="25%" align="center">
-<h3>🤖 <strong>AI-Powered</strong></h3>
-<p>Automated risk detection & compliance.<br/>
-<strong style="color: #7C3AED;">Prevent costly mistakes</strong></p>
-<p><small><em>Intelligent automation & predictive insights</em></small></p>
-</td>
-<td width="25%" align="center">
-<h3>🏆 <strong>Open Source</strong></h3>
-<p>No vendor lock-in, full control.<br/>
-<strong style="color: #D97706;">Enterprise-grade transparency</strong></p>
-<p><small><em>MIT license, community-driven development</em></small></p>
-</td>
-</tr>
-</table>
 
 ## 🎯 **Perfect For**
 
