@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasury Command Center Navigation Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .persona-selector {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .persona-selector h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+        
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .persona-card {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .persona-card:hover {
+            background: #f3f0ff;
+            border-color: #7C3AED;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        
+        .persona-card.active {
+            background: #7C3AED;
+            color: white;
+            border-color: #5B21B6;
+        }
+        
+        .persona-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .persona-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .persona-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .journey-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .journey-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .journey-title {
+            font-size: 1.8rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .journey-subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .journey-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .step-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            background: #f0f9ff;
+            border-color: #7C3AED;
+            transform: translateY(-2px);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #7C3AED;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .step-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .step-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+        
+        .step-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .step-link {
+            background: #7C3AED;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .step-link:hover {
+            background: #5B21B6;
+            transform: translateY(-1px);
+        }
+        
+        .step-link.secondary {
+            background: #f3f0ff;
+            color: #7C3AED;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .step-link.secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        .quick-tools {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .quick-tools h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1f2937;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .tool-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .tool-card:hover {
+            background: #7C3AED;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .persona-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .journey-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>🎯 Treasury Command Center</h1>
+            <p>Interactive Documentation Navigation</p>
+        </div>
+        
+        <div class="persona-selector">
+            <h2>👥 Choose Your Role</h2>
+            <div class="persona-grid">
+                <div class="persona-card active" data-persona="business">
+                    <div class="persona-icon">💼</div>
+                    <div class="persona-title">Business Leader</div>
+                    <div class="persona-desc">Executive, CFO, Decision Maker</div>
+                </div>
+                <div class="persona-card" data-persona="technical">
+                    <div class="persona-icon">🔧</div>
+                    <div class="persona-title">Technical Evaluator</div>
+                    <div class="persona-desc">Architect, Developer, IT</div>
+                </div>
+                <div class="persona-card" data-persona="community">
+                    <div class="persona-icon">🤝</div>
+                    <div class="persona-title">Community Member</div>
+                    <div class="persona-desc">Contributor, Open Source</div>
+                </div>
+                <div class="persona-card" data-persona="implementer">
+                    <div class="persona-icon">👩‍💻</div>
+                    <div class="persona-title">Implementation Team</div>
+                    <div class="persona-desc">DevOps, Developer, Admin</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="journey-container" id="journeyContainer">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+        
+        <div class="quick-tools">
+            <h3>🛠️ Quick Tools & Resources</h3>
+            <div class="tools-grid">
+                <a href="DOCUMENTATION_SEARCH.html" class="tool-card">
+                    <div class="tool-icon">🔍</div>
+                    <div class="tool-title">Search Docs</div>
+                    <div class="tool-desc">Find specific information</div>
+                </a>
+                <a href="../README.md" class="tool-card">
+                    <div class="tool-icon">📚</div>
+                    <div class="tool-title">Main README</div>
+                    <div class="tool-desc">Start here overview</div>
+                </a>
+                <a href="../COMPREHENSIVE_DOCUMENTATION_INDEX.md" class="tool-card">
+                    <div class="tool-icon">🗂️</div>
+                    <div class="tool-title">Full Index</div>
+                    <div class="tool-desc">Complete navigation</div>
+                </a>
+                <a href="../getting-started/QUICK_START.md" class="tool-card">
+                    <div class="tool-icon">⚡</div>
+                    <div class="tool-title">Quick Start</div>
+                    <div class="tool-desc">15-minute setup</div>
+                </a>
+                <a href="../api/README.md" class="tool-card">
+                    <div class="tool-icon">🔌</div>
+                    <div class="tool-title">API Docs</div>
+                    <div class="tool-desc">Technical reference</div>
+                </a>
+                <a href="../CONTRIBUTING.md" class="tool-card">
+                    <div class="tool-icon">🎯</div>
+                    <div class="tool-title">Contributing</div>
+                    <div class="tool-desc">How to help</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const journeys = {
+            business: {
+                title: "💼 Business Leader Journey",
+                subtitle: "Strategic evaluation and decision-making path",
+                steps: [
+                    {
+                        title: "Business Value Assessment",
+                        description: "Understand ROI, competitive advantages, and strategic positioning",
+                        time: "3 min",
+                        layer: "Layer 2",
+                        actions: [
+                            { text: "Read Overview", link: "../business/BUSINESS_VALUE_OVERVIEW.md", primary: true },
+                            { text: "ROI Calculator", link: "#", secondary: true }
+                        ]
+                    },
+                    {
+                        title: "Market Opportunity Analysis",
+                        description: "Review market positioning and competitive landscape",
+                        time: "5 min",
+                        layer: "Layer 3",
+                        actions: [
+                            { text: "Market Analysis", link: "../business/MARKET_OPPORTUNITY.md", primary: true }
+                        ]
+                    },
+                    {
+                        title: "Detailed Business Case",
+                        description: "Complete financial impact analysis and implementation strategy",
+                        time: "8 min",
+                        layer: "Layer 3",
+                        actions: [
+                            { text: "Full Business Case", link: "../business/DETAILED_BUSINESS_CASE.md", primary: true },
+                            { text: "Schedule Demo", link: "#", secondary: true }
+                        ]
+                    },
+                    {
+                        title: "Implementation Planning",
+                        description: "Review deployment timeline, resources, and success metrics",
+                        time: "10 min",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "Implementation Guide", link: "../business/IMPLEMENTATION_ROADMAP.md", primary: true },
+                            { text: "Pilot Program", link: "#", secondary: true }
+                        ]
+                    }
+                ]
+            },
+            technical: {
+                title: "🔧 Technical Evaluator Journey",
+                subtitle: "Architecture assessment and integration planning",
+                steps: [
+                    {
+                        title: "Technical Overview",
+                        description: "Review architecture, technology stack, and integration requirements",
+                        time: "5 min",
+                        layer: "Layer 2",
+                        actions: [
+                            { text: "Technical Evaluation", link: "../technical/TECHNICAL_EVALUATION.md", primary: true }
+                        ]
+                    },
+                    {
+                        title: "Architecture Deep Dive",
+                        description: "Comprehensive system design and deployment strategies",
+                        time: "10 min",
+                        layer: "Layer 3",
+                        actions: [
+                            { text: "Architecture Guide", link: "../technical/TECHNICAL_DEEP_DIVE.md", primary: true },
+                            { text: "Security Review", link: "#", secondary: true }
+                        ]
+                    },
+                    {
+                        title: "Hands-On Validation",
+                        description: "Local deployment and functionality testing",
+                        time: "30 min",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "Quick Start", link: "../getting-started/QUICK_START.md", primary: true },
+                            { text: "Dev Setup", link: "../developers/DEVELOPMENT_SETUP.md", secondary: true }
+                        ]
+                    },
+                    {
+                        title: "Production Planning",
+                        description: "Enterprise deployment and monitoring configuration",
+                        time: "45 min",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "Production Guide", link: "../deployment/PRODUCTION_DEPLOYMENT.md", primary: true },
+                            { text: "Monitoring Setup", link: "#", secondary: true }
+                        ]
+                    }
+                ]
+            },
+            community: {
+                title: "🤝 Community Member Journey",
+                subtitle: "Contribution and collaboration pathway",
+                steps: [
+                    {
+                        title: "Community Overview",
+                        description: "Discover contribution opportunities and community benefits",
+                        time: "5 min",
+                        layer: "Layer 2",
+                        actions: [
+                            { text: "Community Guide", link: "../community/CONTRIBUTION_OVERVIEW.md", primary: true }
+                        ]
+                    },
+                    {
+                        title: "First Contribution",
+                        description: "30-minute onboarding with multiple contribution pathways",
+                        time: "30 min",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "First Steps", link: "../community/FIRST_CONTRIBUTION.md", primary: true },
+                            { text: "Good First Issues", link: "#", secondary: true }
+                        ]
+                    },
+                    {
+                        title: "Development Setup",
+                        description: "Complete development environment for code contributions",
+                        time: "30 min",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "Dev Environment", link: "../developers/DEVELOPMENT_SETUP.md", primary: true }
+                        ]
+                    },
+                    {
+                        title: "Advanced Contribution",
+                        description: "Leadership opportunities and governance participation",
+                        time: "7 min",
+                        layer: "Layer 3",
+                        actions: [
+                            { text: "Advanced Guide", link: "../community/ADVANCED_CONTRIBUTION.md", primary: true },
+                            { text: "Join Discord", link: "#", secondary: true }
+                        ]
+                    }
+                ]
+            },
+            implementer: {
+                title: "👩‍💻 Implementation Team Journey",
+                subtitle: "Hands-on deployment and development",
+                steps: [
+                    {
+                        title: "Quick Start Deployment",
+                        description: "15-minute local setup with prerequisites and commands",
+                        time: "15 min",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "Quick Setup", link: "../getting-started/QUICK_START.md", primary: true }
+                        ]
+                    },
+                    {
+                        title: "Development Environment",
+                        description: "Complete development setup with testing and debugging tools",
+                        time: "30 min",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "Full Dev Setup", link: "../developers/DEVELOPMENT_SETUP.md", primary: true },
+                            { text: "Testing Guide", link: "#", secondary: true }
+                        ]
+                    },
+                    {
+                        title: "Multi-Chain Integration",
+                        description: "Configure blockchain networks and wallet connections",
+                        time: "45 min",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "Blockchain Setup", link: "../integration/blockchain/MULTI_CHAIN_SETUP.md", primary: true }
+                        ]
+                    },
+                    {
+                        title: "Production Deployment",
+                        description: "Enterprise deployment with monitoring and security",
+                        time: "2 hours",
+                        layer: "Layer 4",
+                        actions: [
+                            { text: "Production Guide", link: "../deployment/PRODUCTION_DEPLOYMENT.md", primary: true },
+                            { text: "Monitoring Dashboard", link: "#", secondary: true }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        let currentPersona = 'business';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupPersonaSelector();
+            displayJourney(currentPersona);
+        });
+
+        function setupPersonaSelector() {
+            const personaCards = document.querySelectorAll('.persona-card');
+            
+            personaCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove active from all cards
+                    personaCards.forEach(c => c.classList.remove('active'));
+                    // Add active to clicked card
+                    this.classList.add('active');
+                    
+                    // Update current persona
+                    currentPersona = this.dataset.persona;
+                    displayJourney(currentPersona);
+                });
+            });
+        }
+
+        function displayJourney(persona) {
+            const container = document.getElementById('journeyContainer');
+            const journey = journeys[persona];
+            
+            if (!journey) return;
+            
+            container.innerHTML = `
+                <div class="journey-header">
+                    <div class="journey-title">${journey.title}</div>
+                    <div class="journey-subtitle">${journey.subtitle}</div>
+                </div>
+                <div class="journey-steps">
+                    ${journey.steps.map((step, index) => `
+                        <div class="step-card">
+                            <div class="step-number">${index + 1}</div>
+                            <div class="step-title">${step.title}</div>
+                            <div class="step-description">${step.description}</div>
+                            <div class="step-meta">
+                                <span>📖 ${step.time}</span>
+                                <span style="background: #7C3AED; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem;">${step.layer}</span>
+                            </div>
+                            <div class="step-actions">
+                                ${step.actions.map(action => `
+                                    <a href="${action.link}" class="step-link ${action.secondary ? 'secondary' : ''}" ${action.link.startsWith('http') ? 'target="_blank"' : ''}>
+                                        ${action.text}
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '1' && e.key <= '4') {
+                const personas = ['business', 'technical', 'community', 'implementer'];
+                const index = parseInt(e.key) - 1;
+                if (personas[index]) {
+                    const card = document.querySelector(`[data-persona="${personas[index]}"]`);
+                    if (card) card.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

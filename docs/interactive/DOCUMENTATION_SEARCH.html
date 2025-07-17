@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasury Command Center Documentation Search</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #7C3AED;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .search-box {
+            padding: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .search-input-container {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #7C3AED;
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 1.2rem;
+        }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .filter-tag {
+            background: #f3f0ff;
+            color: #7C3AED;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .filter-tag:hover {
+            background: #7C3AED;
+            color: white;
+        }
+        
+        .filter-tag.active {
+            background: #7C3AED;
+            color: white;
+        }
+        
+        .results {
+            padding: 2rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result-item {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .result-item:hover {
+            background: #f3f0ff;
+            border-color: #7C3AED;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        
+        .result-layer {
+            background: #7C3AED;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+        
+        .quick-links {
+            background: #f9fafb;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .quick-links h3 {
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+        
+        .quick-link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .quick-link {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            text-decoration: none;
+            color: #1f2937;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-link:hover {
+            background: #7C3AED;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .quick-link-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-link-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .search-box {
+                padding: 1.5rem;
+            }
+            
+            .results {
+                padding: 1.5rem;
+            }
+            
+            .quick-link-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <div class="header">
+            <h1>🔍 Documentation Search</h1>
+            <p>Find exactly what you need in Treasury Command Center docs</p>
+        </div>
+        
+        <div class="search-box">
+            <div class="search-input-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Search documentation... (e.g., 'setup', 'API', 'business value')" id="searchInput">
+            </div>
+            
+            <div class="filters" id="filters">
+                <div class="filter-tag active" data-layer="all">All Docs</div>
+                <div class="filter-tag" data-layer="layer1">Quick Overview</div>
+                <div class="filter-tag" data-layer="layer2">Summaries</div>
+                <div class="filter-tag" data-layer="layer3">Deep Dive</div>
+                <div class="filter-tag" data-layer="layer4">Implementation</div>
+                <div class="filter-tag" data-category="business">Business</div>
+                <div class="filter-tag" data-category="technical">Technical</div>
+                <div class="filter-tag" data-category="community">Community</div>
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <!-- Results will be populated by JavaScript -->
+        </div>
+        
+        <div class="quick-links">
+            <h3>🚀 Quick Access</h3>
+            <div class="quick-link-grid">
+                <a href="../README.md" class="quick-link">
+                    <div class="quick-link-title">📚 Main README</div>
+                    <div class="quick-link-desc">Start here - Layer 1 overview</div>
+                </a>
+                <a href="../business/BUSINESS_VALUE_OVERVIEW.md" class="quick-link">
+                    <div class="quick-link-title">💼 Business Value</div>
+                    <div class="quick-link-desc">3-minute ROI assessment</div>
+                </a>
+                <a href="../technical/TECHNICAL_EVALUATION.md" class="quick-link">
+                    <div class="quick-link-title">🔧 Technical Fit</div>
+                    <div class="quick-link-desc">5-minute architecture review</div>
+                </a>
+                <a href="../getting-started/QUICK_START.md" class="quick-link">
+                    <div class="quick-link-title">⚡ Quick Start</div>
+                    <div class="quick-link-desc">15-minute setup guide</div>
+                </a>
+                <a href="../developers/DEVELOPMENT_SETUP.md" class="quick-link">
+                    <div class="quick-link-title">👩‍💻 Dev Setup</div>
+                    <div class="quick-link-desc">Complete development environment</div>
+                </a>
+                <a href="../community/FIRST_CONTRIBUTION.md" class="quick-link">
+                    <div class="quick-link-title">🤝 Contribute</div>
+                    <div class="quick-link-desc">30-minute contribution guide</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Documentation index with metadata
+        const documentationIndex = [
+            {
+                title: "Treasury Command Center - Main Overview",
+                description: "Enterprise-grade platform for Web3 treasury management with 70% operational reduction and $219K annual savings",
+                path: "../README.md",
+                layer: "layer1",
+                category: "overview",
+                keywords: ["overview", "main", "treasury", "web3", "platform", "enterprise", "savings", "operational"],
+                readTime: "2 min"
+            },
+            {
+                title: "Business Value Summary",
+                description: "3-minute business assessment with key value proposition and financial impact for decision makers",
+                path: "../business/BUSINESS_VALUE_OVERVIEW.md",
+                layer: "layer2",
+                category: "business",
+                keywords: ["business", "value", "roi", "financial", "savings", "decision", "executive", "impact"],
+                readTime: "3 min"
+            },
+            {
+                title: "Technical Evaluation",
+                description: "5-minute technical assessment with architecture overview and integration fit evaluation",
+                path: "../technical/TECHNICAL_EVALUATION.md",
+                layer: "layer2",
+                category: "technical",
+                keywords: ["technical", "architecture", "integration", "stack", "kubernetes", "docker", "api"],
+                readTime: "5 min"
+            },
+            {
+                title: "Community Overview",
+                description: "5-minute onboarding to discover contribution opportunities in the Treasury Command Center ecosystem",
+                path: "../community/CONTRIBUTION_OVERVIEW.md",
+                layer: "layer2",
+                category: "community",
+                keywords: ["community", "contribute", "open source", "developer", "collaboration", "github"],
+                readTime: "5 min"
+            },
+            {
+                title: "Documentation Hub",
+                description: "Role-based navigation system with progressive disclosure for optimal learning efficiency",
+                path: "../docs/README.md",
+                layer: "layer2",
+                category: "documentation",
+                keywords: ["documentation", "navigation", "hub", "progressive", "disclosure", "role-based"],
+                readTime: "3 min"
+            },
+            {
+                title: "Detailed Business Case",
+                description: "Comprehensive ROI analysis, market assessment, and implementation strategy with $219K savings breakdown",
+                path: "../business/DETAILED_BUSINESS_CASE.md",
+                layer: "layer3",
+                category: "business",
+                keywords: ["detailed", "business", "case", "roi", "market", "implementation", "strategy", "comprehensive"],
+                readTime: "8 min"
+            },
+            {
+                title: "Technical Deep Dive",
+                description: "Complete architecture analysis, deployment strategies, and integration complexity assessment",
+                path: "../technical/TECHNICAL_DEEP_DIVE.md",
+                layer: "layer3",
+                category: "technical",
+                keywords: ["architecture", "deployment", "integration", "complexity", "technical", "deep", "analysis"],
+                readTime: "10 min"
+            },
+            {
+                title: "Advanced Contribution",
+                description: "Comprehensive governance structure, leadership pathways, and detailed contribution processes",
+                path: "../community/ADVANCED_CONTRIBUTION.md",
+                layer: "layer3",
+                category: "community",
+                keywords: ["advanced", "contribution", "governance", "leadership", "community", "processes", "maintainer"],
+                readTime: "7 min"
+            },
+            {
+                title: "Quick Start Guide",
+                description: "15-minute setup guide with prerequisites and step-by-step commands for local deployment",
+                path: "../getting-started/QUICK_START.md",
+                layer: "layer4",
+                category: "implementation",
+                keywords: ["quick", "start", "setup", "install", "deploy", "local", "commands", "prerequisites"],
+                readTime: "15 min"
+            },
+            {
+                title: "Development Setup",
+                description: "Complete development environment setup with testing, debugging, and deployment tools",
+                path: "../developers/DEVELOPMENT_SETUP.md",
+                layer: "layer4",
+                category: "implementation",
+                keywords: ["development", "setup", "environment", "testing", "debugging", "tools", "developer"],
+                readTime: "30 min"
+            },
+            {
+                title: "Production Deployment",
+                description: "Enterprise deployment guide with monitoring, security, and scalability configuration",
+                path: "../deployment/PRODUCTION_DEPLOYMENT.md",
+                layer: "layer4",
+                category: "implementation",
+                keywords: ["production", "deployment", "enterprise", "monitoring", "security", "scalability", "kubernetes"],
+                readTime: "45 min"
+            },
+            {
+                title: "First Contribution",
+                description: "30-minute onboarding experience for new contributors with multiple contribution pathways",
+                path: "../community/FIRST_CONTRIBUTION.md",
+                layer: "layer4",
+                category: "implementation",
+                keywords: ["first", "contribution", "onboarding", "new", "contributor", "pathways", "beginner"],
+                readTime: "30 min"
+            }
+        ];
+
+        let currentFilter = { layer: 'all', category: 'all' };
+        let searchResults = documentationIndex;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displayResults(documentationIndex);
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            const searchInput = document.getElementById('searchInput');
+            const filterTags = document.querySelectorAll('.filter-tag');
+
+            searchInput.addEventListener('input', performSearch);
+            
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // Remove active from all tags
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    // Add active to clicked tag
+                    this.classList.add('active');
+                    
+                    // Update filter
+                    if (this.dataset.layer) {
+                        currentFilter.layer = this.dataset.layer;
+                        currentFilter.category = 'all';
+                    } else if (this.dataset.category) {
+                        currentFilter.category = this.dataset.category;
+                        currentFilter.layer = 'all';
+                    }
+                    
+                    performSearch();
+                });
+            });
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            
+            let filtered = documentationIndex;
+            
+            // Apply layer filter
+            if (currentFilter.layer !== 'all') {
+                filtered = filtered.filter(doc => doc.layer === currentFilter.layer);
+            }
+            
+            // Apply category filter
+            if (currentFilter.category !== 'all') {
+                filtered = filtered.filter(doc => doc.category === currentFilter.category);
+            }
+            
+            // Apply search query
+            if (query) {
+                filtered = filtered.filter(doc => {
+                    return doc.title.toLowerCase().includes(query) ||
+                           doc.description.toLowerCase().includes(query) ||
+                           doc.keywords.some(keyword => keyword.toLowerCase().includes(query));
+                });
+            }
+            
+            searchResults = filtered;
+            displayResults(filtered);
+        }
+
+        function displayResults(results) {
+            const resultsContainer = document.getElementById('results');
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>🔍 No results found</h3>
+                        <p>Try adjusting your search terms or filters</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            resultsContainer.innerHTML = results.map(doc => `
+                <div class="result-item" onclick="window.open('${doc.path}', '_blank')">
+                    <div class="result-title">${doc.title}</div>
+                    <div class="result-description">${doc.description}</div>
+                    <div class="result-meta">
+                        <span>📖 ${doc.readTime}</span>
+                        <span class="result-layer">${getLayerName(doc.layer)}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getLayerName(layer) {
+            const layerNames = {
+                'layer1': 'Overview',
+                'layer2': 'Summary', 
+                'layer3': 'Deep Dive',
+                'layer4': 'Implementation'
+            };
+            return layerNames[layer] || layer;
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+    </script>
+</body>
+</html>
