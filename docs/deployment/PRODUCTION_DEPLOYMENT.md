@@ -4,20 +4,152 @@ Comprehensive guide for deploying Treasury Command Center in production environm
 
 ## 🏗️ Production Architecture
 
-### Recommended Infrastructure
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Load Balancer │    │   Web Servers   │    │   Database      │
-│   (nginx/HAProxy│ -> │   (Frontend)    │ -> │   (PostgreSQL)  │
-│   + SSL/TLS)    │    │   Multiple pods │    │   with replicas │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                                │
-                       ┌─────────────────┐    ┌─────────────────┐
-                       │   API Servers   │    │   Cache Layer   │
-                       │   (Backend)     │ -> │   (Redis)       │
-                       │   Multiple pods │    │   with clusters │
-                       └─────────────────┘    └─────────────────┘
+### Production Infrastructure Architecture
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#7C3AED',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#5B21B6',
+    'lineColor': '#6B7280',
+    'sectionColor': '#F3F0FF',
+    'textColor': '#374151'
+  }
+}}%%
+graph TB
+    subgraph "Internet & CDN"
+        Users[Users]
+        CDN[Content Delivery Network<br/>Static Assets & Caching]
+        DNS[DNS & Domain<br/>Route 53 / Cloudflare]
+    end
+    
+    subgraph "Load Balancing & SSL"
+        LB[Load Balancer<br/>nginx/HAProxy + SSL/TLS]
+        WAF[Web Application Firewall<br/>DDoS Protection]
+        SSL[SSL Termination<br/>Let's Encrypt / Custom Certs]
+    end
+    
+    subgraph "Application Layer - Frontend"
+        FE1[Frontend Server 1<br/>Next.js Application]
+        FE2[Frontend Server 2<br/>Next.js Application]
+        FE3[Frontend Server 3<br/>Next.js Application]
+    end
+    
+    subgraph "Application Layer - Backend"
+        BE1[Backend Server 1<br/>FastAPI + Services]
+        BE2[Backend Server 2<br/>FastAPI + Services]
+        BE3[Backend Server 3<br/>FastAPI + Services]
+    end
+    
+    subgraph "Data Layer - Primary"
+        PG_PRIMARY[(PostgreSQL Primary<br/>Read/Write Operations)]
+        PG_REPLICA1[(PostgreSQL Replica 1<br/>Read Operations)]
+        PG_REPLICA2[(PostgreSQL Replica 2<br/>Read Operations)]
+    end
+    
+    subgraph "Data Layer - Cache & Storage"
+        REDIS_CLUSTER[(Redis Cluster<br/>Session & Cache)]
+        REDIS_SENTINEL[(Redis Sentinel<br/>High Availability)]
+        FILE_STORAGE[(File Storage<br/>Reports & Backups<br/>S3/MinIO)]
+    end
+    
+    subgraph "Monitoring & Observability"
+        PROMETHEUS[Prometheus<br/>Metrics Collection]
+        GRAFANA[Grafana<br/>Monitoring Dashboards]
+        LOKI[Loki<br/>Log Aggregation]
+        JAEGER[Jaeger<br/>Distributed Tracing]
+    end
+    
+    subgraph "External Services"
+        BLOCKCHAIN[Blockchain Nodes<br/>Ethereum, Polygon, etc.]
+        PRICE_APIS[Price Data APIs<br/>CoinGecko, Chainlink]
+        EMAIL_SVC[Email Service<br/>SendGrid/SES]
+        BACKUP_STORAGE[(Backup Storage<br/>S3 Glacier/Cold Storage)]
+    end
+    
+    %% User flow
+    Users --> DNS
+    DNS --> CDN
+    CDN --> WAF
+    WAF --> SSL
+    SSL --> LB
+    
+    %% Load balancer distribution
+    LB --> FE1
+    LB --> FE2
+    LB --> FE3
+    
+    LB --> BE1
+    LB --> BE2
+    LB --> BE3
+    
+    %% Backend to data layer
+    BE1 --> PG_PRIMARY
+    BE2 --> PG_PRIMARY
+    BE3 --> PG_PRIMARY
+    
+    BE1 --> PG_REPLICA1
+    BE2 --> PG_REPLICA2
+    BE3 --> PG_REPLICA1
+    
+    BE1 --> REDIS_CLUSTER
+    BE2 --> REDIS_CLUSTER
+    BE3 --> REDIS_CLUSTER
+    
+    %% Database replication
+    PG_PRIMARY -.-> PG_REPLICA1
+    PG_PRIMARY -.-> PG_REPLICA2
+    
+    %% Redis high availability
+    REDIS_CLUSTER -.-> REDIS_SENTINEL
+    
+    %% File storage
+    BE1 --> FILE_STORAGE
+    BE2 --> FILE_STORAGE
+    BE3 --> FILE_STORAGE
+    
+    %% External connections
+    BE1 --> BLOCKCHAIN
+    BE2 --> PRICE_APIS
+    BE3 --> EMAIL_SVC
+    
+    %% Backup strategy
+    PG_PRIMARY --> BACKUP_STORAGE
+    FILE_STORAGE --> BACKUP_STORAGE
+    
+    %% Monitoring connections
+    BE1 --> PROMETHEUS
+    BE2 --> PROMETHEUS
+    BE3 --> PROMETHEUS
+    FE1 --> PROMETHEUS
+    FE2 --> PROMETHEUS
+    FE3 --> PROMETHEUS
+    
+    PROMETHEUS --> GRAFANA
+    BE1 --> LOKI
+    BE2 --> LOKI
+    BE3 --> LOKI
+    
+    %% Styling
+    classDef internet fill:#6B7280,color:#FFFFFF,stroke:#4B5563,stroke-width:2px
+    classDef security fill:#DC2626,color:#FFFFFF,stroke:#B91C1C,stroke-width:2px
+    classDef frontend fill:#F3F0FF,stroke:#7C3AED,stroke-width:2px
+    classDef backend fill:#7C3AED,color:#FFFFFF,stroke:#5B21B6,stroke-width:2px
+    classDef database fill:#1E40AF,color:#FFFFFF,stroke:#1E3A8A,stroke-width:2px
+    classDef cache fill:#059669,color:#FFFFFF,stroke:#047857,stroke-width:2px
+    classDef monitoring fill:#D97706,color:#FFFFFF,stroke:#B45309,stroke-width:2px
+    classDef external fill:#6B7280,color:#FFFFFF,stroke:#4B5563,stroke-width:2px
+    
+    class Users,CDN,DNS internet
+    class LB,WAF,SSL security
+    class FE1,FE2,FE3 frontend
+    class BE1,BE2,BE3 backend
+    class PG_PRIMARY,PG_REPLICA1,PG_REPLICA2 database
+    class REDIS_CLUSTER,REDIS_SENTINEL,FILE_STORAGE cache
+    class PROMETHEUS,GRAFANA,LOKI,JAEGER monitoring
+    class BLOCKCHAIN,PRICE_APIS,EMAIL_SVC,BACKUP_STORAGE external
 ```
 
 ### Minimum Production Requirements
@@ -207,6 +339,244 @@ sudo systemctl enable treasury-cc-backend
 sudo systemctl start treasury-cc-backend
 ```
 
+## 🔄 CI/CD Deployment Pipeline
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#7C3AED',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#5B21B6',
+    'lineColor': '#6B7280',
+    'sectionColor': '#F3F0FF',
+    'textColor': '#374151'
+  }
+}}%%
+flowchart TD
+    subgraph "Development"
+        DEV[Developer Commits]
+        PR[Pull Request Created]
+        REVIEW[Code Review]
+    end
+    
+    subgraph "CI Pipeline"
+        TRIGGER[GitHub Actions Trigger]
+        BUILD[Build & Test]
+        LINT[Code Quality Checks]
+        SECURITY[Security Scanning]
+        PACKAGE[Build Docker Images]
+    end
+    
+    subgraph "Quality Gates"
+        UNIT_TESTS[Unit Tests<br/>95%+ Coverage]
+        INTEGRATION[Integration Tests<br/>API & Database]
+        E2E[End-to-End Tests<br/>UI Workflows]
+        PERFORMANCE[Performance Tests<br/>Load & Stress]
+    end
+    
+    subgraph "Staging Deployment"
+        STAGING_BUILD[Deploy to Staging]
+        STAGING_TESTS[Staging Validation]
+        SMOKE_TESTS[Smoke Tests]
+        UAT[User Acceptance Testing]
+    end
+    
+    subgraph "Production Deployment"
+        PROD_APPROVAL[Production Approval]
+        BLUE_GREEN[Blue/Green Deployment]
+        HEALTH_CHECK[Health Checks]
+        MONITORING[Monitoring & Alerts]
+    end
+    
+    subgraph "Post-Deployment"
+        ROLLBACK{Rollback<br/>if Issues?}
+        SUCCESS[Deployment Success]
+        NOTIFICATION[Team Notifications]
+        CLEANUP[Cleanup Old Images]
+    end
+    
+    %% Development flow
+    DEV --> PR
+    PR --> REVIEW
+    REVIEW --> TRIGGER
+    
+    %% CI Pipeline
+    TRIGGER --> BUILD
+    BUILD --> LINT
+    LINT --> SECURITY
+    SECURITY --> PACKAGE
+    
+    %% Quality gates
+    PACKAGE --> UNIT_TESTS
+    UNIT_TESTS --> INTEGRATION
+    INTEGRATION --> E2E
+    E2E --> PERFORMANCE
+    
+    %% Staging deployment
+    PERFORMANCE --> STAGING_BUILD
+    STAGING_BUILD --> STAGING_TESTS
+    STAGING_TESTS --> SMOKE_TESTS
+    SMOKE_TESTS --> UAT
+    
+    %% Production deployment
+    UAT --> PROD_APPROVAL
+    PROD_APPROVAL --> BLUE_GREEN
+    BLUE_GREEN --> HEALTH_CHECK
+    HEALTH_CHECK --> MONITORING
+    
+    %% Post-deployment
+    MONITORING --> ROLLBACK
+    ROLLBACK -->|Issues Found| BLUE_GREEN
+    ROLLBACK -->|Success| SUCCESS
+    SUCCESS --> NOTIFICATION
+    NOTIFICATION --> CLEANUP
+    
+    %% Styling
+    classDef development fill:#F3F0FF,stroke:#7C3AED,stroke-width:2px
+    classDef ci fill:#7C3AED,color:#FFFFFF,stroke:#5B21B6,stroke-width:2px
+    classDef quality fill:#1E40AF,color:#FFFFFF,stroke:#1E3A8A,stroke-width:2px
+    classDef staging fill:#C65D3C,color:#FFFFFF,stroke:#B5472A,stroke-width:2px
+    classDef production fill:#059669,color:#FFFFFF,stroke:#047857,stroke-width:2px
+    classDef post fill:#D97706,color:#FFFFFF,stroke:#B45309,stroke-width:2px
+    classDef decision fill:#DC2626,color:#FFFFFF,stroke:#B91C1C,stroke-width:2px
+    
+    class DEV,PR,REVIEW development
+    class TRIGGER,BUILD,LINT,SECURITY,PACKAGE ci
+    class UNIT_TESTS,INTEGRATION,E2E,PERFORMANCE quality
+    class STAGING_BUILD,STAGING_TESTS,SMOKE_TESTS,UAT staging
+    class PROD_APPROVAL,BLUE_GREEN,HEALTH_CHECK,MONITORING production
+    class SUCCESS,NOTIFICATION,CLEANUP post
+    class ROLLBACK decision
+```
+
+## ⚖️ Load Balancing & Traffic Management
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#7C3AED',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#5B21B6',
+    'lineColor': '#6B7280',
+    'sectionColor': '#F3F0FF',
+    'textColor': '#374151'
+  }
+}}%%
+graph TB
+    subgraph "External Traffic"
+        USERS[Users Worldwide]
+        ATTACKS[DDoS Attacks]
+        BOTS[Bot Traffic]
+    end
+    
+    subgraph "Edge Protection"
+        WAF[Web Application Firewall<br/>DDoS Protection<br/>Bot Detection]
+        RATE_LIMIT[Rate Limiting<br/>1000 req/hour per IP]
+        GEO_FILTER[Geographic Filtering<br/>Block/Allow Regions]
+    end
+    
+    subgraph "Load Balancer Layer"
+        LB_PRIMARY[Primary Load Balancer<br/>nginx/HAProxy<br/>Active]
+        LB_SECONDARY[Secondary Load Balancer<br/>nginx/HAProxy<br/>Standby]
+        HEALTH_CHECK[Health Check Service<br/>Monitor Backend Status]
+    end
+    
+    subgraph "Frontend Cluster"
+        FE_PRIMARY[Frontend Primary<br/>Next.js App<br/>Active]
+        FE_SECONDARY[Frontend Secondary<br/>Next.js App<br/>Active]
+        FE_TERTIARY[Frontend Tertiary<br/>Next.js App<br/>Standby]
+    end
+    
+    subgraph "Backend Cluster"
+        BE_PRIMARY[Backend Primary<br/>FastAPI<br/>Active]
+        BE_SECONDARY[Backend Secondary<br/>FastAPI<br/>Active]
+        BE_TERTIARY[Backend Tertiary<br/>FastAPI<br/>Standby]
+    end
+    
+    subgraph "Database Cluster"
+        DB_PRIMARY[(Database Primary<br/>Read/Write<br/>PostgreSQL)]
+        DB_REPLICA1[(Database Replica 1<br/>Read Only<br/>PostgreSQL)]
+        DB_REPLICA2[(Database Replica 2<br/>Read Only<br/>PostgreSQL)]
+    end
+    
+    subgraph "Cache Cluster"
+        REDIS_MASTER[(Redis Master<br/>Read/Write)]
+        REDIS_SLAVE1[(Redis Slave 1<br/>Read Only)]
+        REDIS_SLAVE2[(Redis Slave 2<br/>Read Only)]
+    end
+    
+    %% Traffic flow
+    USERS --> WAF
+    ATTACKS --> WAF
+    BOTS --> WAF
+    
+    WAF --> RATE_LIMIT
+    RATE_LIMIT --> GEO_FILTER
+    GEO_FILTER --> LB_PRIMARY
+    
+    %% Load balancer failover
+    LB_PRIMARY -.->|Failover| LB_SECONDARY
+    HEALTH_CHECK --> LB_PRIMARY
+    HEALTH_CHECK --> LB_SECONDARY
+    
+    %% Frontend distribution
+    LB_PRIMARY --> FE_PRIMARY
+    LB_PRIMARY --> FE_SECONDARY
+    LB_SECONDARY --> FE_TERTIARY
+    
+    %% Backend distribution
+    LB_PRIMARY --> BE_PRIMARY
+    LB_PRIMARY --> BE_SECONDARY
+    LB_SECONDARY --> BE_TERTIARY
+    
+    %% Database connections
+    BE_PRIMARY --> DB_PRIMARY
+    BE_PRIMARY --> DB_REPLICA1
+    BE_SECONDARY --> DB_PRIMARY
+    BE_SECONDARY --> DB_REPLICA2
+    BE_TERTIARY --> DB_REPLICA1
+    
+    %% Database replication
+    DB_PRIMARY -.->|Replication| DB_REPLICA1
+    DB_PRIMARY -.->|Replication| DB_REPLICA2
+    
+    %% Cache connections
+    BE_PRIMARY --> REDIS_MASTER
+    BE_SECONDARY --> REDIS_SLAVE1
+    BE_TERTIARY --> REDIS_SLAVE2
+    
+    %% Cache replication
+    REDIS_MASTER -.->|Replication| REDIS_SLAVE1
+    REDIS_MASTER -.->|Replication| REDIS_SLAVE2
+    
+    %% Health monitoring
+    HEALTH_CHECK -.-> FE_PRIMARY
+    HEALTH_CHECK -.-> FE_SECONDARY
+    HEALTH_CHECK -.-> FE_TERTIARY
+    HEALTH_CHECK -.-> BE_PRIMARY
+    HEALTH_CHECK -.-> BE_SECONDARY
+    HEALTH_CHECK -.-> BE_TERTIARY
+    
+    %% Styling
+    classDef traffic fill:#6B7280,color:#FFFFFF,stroke:#4B5563,stroke-width:2px
+    classDef protection fill:#DC2626,color:#FFFFFF,stroke:#B91C1C,stroke-width:2px
+    classDef balancer fill:#7C3AED,color:#FFFFFF,stroke:#5B21B6,stroke-width:2px
+    classDef frontend fill:#F3F0FF,stroke:#7C3AED,stroke-width:2px
+    classDef backend fill:#1E40AF,color:#FFFFFF,stroke:#1E3A8A,stroke-width:2px
+    classDef database fill:#059669,color:#FFFFFF,stroke:#047857,stroke-width:2px
+    classDef cache fill:#C65D3C,color:#FFFFFF,stroke:#B5472A,stroke-width:2px
+    
+    class USERS,ATTACKS,BOTS traffic
+    class WAF,RATE_LIMIT,GEO_FILTER protection
+    class LB_PRIMARY,LB_SECONDARY,HEALTH_CHECK balancer
+    class FE_PRIMARY,FE_SECONDARY,FE_TERTIARY frontend
+    class BE_PRIMARY,BE_SECONDARY,BE_TERTIARY backend
+    class DB_PRIMARY,DB_REPLICA1,DB_REPLICA2 database
+    class REDIS_MASTER,REDIS_SLAVE1,REDIS_SLAVE2 cache
+```
+
 ## 🔒 Security Configuration
 
 ### SSL/TLS Setup
@@ -280,6 +650,135 @@ sudo ufw allow from 10.0.0.0/24 to any port 5432
 ```
 
 ## 📊 Monitoring & Observability
+
+### Comprehensive Monitoring Stack
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#7C3AED',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#5B21B6',
+    'lineColor': '#6B7280',
+    'sectionColor': '#F3F0FF',
+    'textColor': '#374151'
+  }
+}}%%
+graph TB
+    subgraph "Application Layer"
+        FE_APP[Frontend Applications<br/>Next.js + React]
+        BE_APP[Backend Services<br/>FastAPI + Python]
+        DB_APP[(Database Services<br/>PostgreSQL + Redis)]
+        EXT_APP[External Services<br/>Blockchain + APIs]
+    end
+    
+    subgraph "Metrics Collection"
+        PROM[Prometheus Server<br/>Metrics Storage & Queries]
+        NODE_EXP[Node Exporter<br/>System Metrics]
+        CADVISOR[cAdvisor<br/>Container Metrics]
+        APP_METRICS[Application Metrics<br/>Custom Business Logic]
+    end
+    
+    subgraph "Log Aggregation"
+        LOKI[Loki<br/>Log Storage & Queries]
+        PROMTAIL[Promtail<br/>Log Collection Agent]
+        FLUENTD[Fluentd<br/>Log Processing & Routing]
+        LOG_STORAGE[(Log Storage<br/>S3 Compatible)]
+    end
+    
+    subgraph "Distributed Tracing"
+        JAEGER[Jaeger<br/>Trace Collection & Analysis]
+        OTEL[OpenTelemetry<br/>Instrumentation]
+        TRACE_STORAGE[(Trace Storage<br/>Elasticsearch)]
+    end
+    
+    subgraph "Visualization & Alerting"
+        GRAFANA[Grafana<br/>Dashboards & Visualization]
+        ALERT_MANAGER[Alert Manager<br/>Alert Routing & Grouping]
+        NOTIFICATION[Notification Channels<br/>Email, Slack, PagerDuty]
+    end
+    
+    subgraph "Synthetic Monitoring"
+        UPTIME[Uptime Monitoring<br/>External Health Checks]
+        PERF_TEST[Performance Testing<br/>Load & Stress Testing]
+        SMOKE_TEST[Smoke Tests<br/>End-to-End Validation]
+    end
+    
+    subgraph "Business Intelligence"
+        BI_DASHBOARDS[Business Dashboards<br/>User Metrics & KPIs]
+        ANALYTICS[Analytics Engine<br/>User Behavior Analysis]
+        REPORTS[Automated Reports<br/>Daily/Weekly/Monthly]
+    end
+    
+    %% Metrics flow
+    FE_APP --> APP_METRICS
+    BE_APP --> APP_METRICS
+    DB_APP --> NODE_EXP
+    EXT_APP --> APP_METRICS
+    
+    APP_METRICS --> PROM
+    NODE_EXP --> PROM
+    CADVISOR --> PROM
+    
+    %% Logging flow
+    FE_APP --> PROMTAIL
+    BE_APP --> PROMTAIL
+    DB_APP --> FLUENTD
+    
+    PROMTAIL --> LOKI
+    FLUENTD --> LOKI
+    LOKI --> LOG_STORAGE
+    
+    %% Tracing flow
+    FE_APP --> OTEL
+    BE_APP --> OTEL
+    OTEL --> JAEGER
+    JAEGER --> TRACE_STORAGE
+    
+    %% Visualization
+    PROM --> GRAFANA
+    LOKI --> GRAFANA
+    JAEGER --> GRAFANA
+    
+    %% Alerting
+    PROM --> ALERT_MANAGER
+    ALERT_MANAGER --> NOTIFICATION
+    
+    %% Synthetic monitoring
+    UPTIME --> PROM
+    PERF_TEST --> PROM
+    SMOKE_TEST --> PROM
+    
+    %% Business intelligence
+    PROM --> BI_DASHBOARDS
+    LOKI --> ANALYTICS
+    ANALYTICS --> REPORTS
+    BI_DASHBOARDS --> REPORTS
+    
+    %% External monitoring
+    UPTIME -.-> FE_APP
+    UPTIME -.-> BE_APP
+    PERF_TEST -.-> FE_APP
+    SMOKE_TEST -.-> BE_APP
+    
+    %% Styling
+    classDef application fill:#F3F0FF,stroke:#7C3AED,stroke-width:2px
+    classDef metrics fill:#7C3AED,color:#FFFFFF,stroke:#5B21B6,stroke-width:2px
+    classDef logging fill:#1E40AF,color:#FFFFFF,stroke:#1E3A8A,stroke-width:2px
+    classDef tracing fill:#C65D3C,color:#FFFFFF,stroke:#B5472A,stroke-width:2px
+    classDef visualization fill:#059669,color:#FFFFFF,stroke:#047857,stroke-width:2px
+    classDef synthetic fill:#D97706,color:#FFFFFF,stroke:#B45309,stroke-width:2px
+    classDef business fill:#6B7280,color:#FFFFFF,stroke:#4B5563,stroke-width:2px
+    
+    class FE_APP,BE_APP,DB_APP,EXT_APP application
+    class PROM,NODE_EXP,CADVISOR,APP_METRICS metrics
+    class LOKI,PROMTAIL,FLUENTD,LOG_STORAGE logging
+    class JAEGER,OTEL,TRACE_STORAGE tracing
+    class GRAFANA,ALERT_MANAGER,NOTIFICATION visualization
+    class UPTIME,PERF_TEST,SMOKE_TEST synthetic
+    class BI_DASHBOARDS,ANALYTICS,REPORTS business
+```
 
 ### Application Monitoring
 ```bash

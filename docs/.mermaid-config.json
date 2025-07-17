@@ -1,0 +1,42 @@
+{
+  "theme": "base",
+  "themeVariables": {
+    "primaryColor": "#7C3AED",
+    "primaryTextColor": "#FFFFFF",
+    "primaryBorderColor": "#5B21B6",
+    "lineColor": "#6B7280",
+    "sectionColor": "#F3F0FF",
+    "altSectionColor": "#FEF3E6",
+    "gridColor": "#E5E7EB",
+    "textColor": "#374151",
+    "taskBkgColor": "#F3F0FF",
+    "taskTextColor": "#374151",
+    "activeTaskBkgColor": "#7C3AED",
+    "activeTaskTextColor": "#FFFFFF",
+    "errorBkgColor": "#FEF2F2",
+    "errorTextColor": "#DC2626",
+    "c0": "#F3F0FF",
+    "c1": "#E9E5FF",
+    "c2": "#D6CEFF",
+    "c3": "#B8A6FF",
+    "c4": "#9572FF",
+    "c5": "#7C3AED",
+    "c6": "#6D28D9",
+    "c7": "#5B21B6"
+  },
+  "flowchart": {
+    "useMaxWidth": true,
+    "htmlLabels": true,
+    "curve": "basis"
+  },
+  "sequence": {
+    "useMaxWidth": true,
+    "rightAngles": true
+  },
+  "gantt": {
+    "useMaxWidth": true,
+    "leftPadding": 75,
+    "rightPadding": 20,
+    "gridLineStartPadding": 35
+  }
+}

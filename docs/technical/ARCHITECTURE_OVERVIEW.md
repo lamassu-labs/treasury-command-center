@@ -7,64 +7,269 @@
 
 ## System Architecture Overview
 
-### **High-Level Architecture**
+### **Complete System Architecture**
 
 ```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#7C3AED',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#5B21B6',
+    'lineColor': '#6B7280',
+    'sectionColor': '#F3F0FF',
+    'altSectionColor': '#FEF3E6',
+    'gridColor': '#E5E7EB',
+    'textColor': '#374151',
+    'secondaryColor': '#1E40AF',
+    'tertiaryColor': '#C65D3C'
+  }
+}}%%
 graph TB
-    subgraph "Frontend Layer"
-        UI[Next.js 14 App Router]
-        Auth[Authentication Module]
-        Dashboard[Dashboard Components]
-        Portfolio[Portfolio Module]
-        Stablecoins[Stablecoin Module]
-        Agents[AI Agents Module]
-        Analytics[Analytics Module]
+    subgraph "User Interface Layer"
+        UI[Next.js 14 Application]
+        Mobile[Mobile Responsive UI]
+        Dashboard[Executive Dashboard]
+        API_UI[API Documentation]
     end
     
-    subgraph "API Gateway Layer"
+    subgraph "API Gateway & Security"
         Gateway[API Gateway]
+        Auth[Authentication Service]
         RateLimit[Rate Limiting]
         LoadBalancer[Load Balancer]
+        SSL[SSL/TLS Termination]
     end
     
-    subgraph "Service Layer"
-        TreasuryAPI[Treasury Service]
-        PortfolioAPI[Portfolio Service]
-        StablecoinAPI[Stablecoin Service]
-        AgentAPI[Agent Service]
-        AnalyticsAPI[Analytics Service]
-        NotificationAPI[Notification Service]
+    subgraph "Core Services Layer"
+        TreasuryAPI[Treasury Management API]
+        PortfolioAPI[Portfolio Analytics API]
+        BlockchainAPI[Blockchain Integration API]
+        NotificationAPI[Alert & Notification API]
+        ReportAPI[Reporting Service API]
+        UserAPI[User Management API]
     end
     
-    subgraph "Data Layer"
-        PostgreSQL[(PostgreSQL)]
-        Redis[(Redis Cache)]
-        TimeSeries[(TimeSeries DB)]
+    subgraph "Data & Cache Layer"
+        PostgreSQL[(PostgreSQL<br/>Primary Database)]
+        Redis[(Redis Cache<br/>Session & Rate Limiting)]
+        TimeSeries[(Time Series DB<br/>Analytics Data)]
+        FileStorage[(File Storage<br/>Reports & Exports)]
     end
     
-    subgraph "Blockchain Layer"
-        Ethereum[Ethereum Nodes]
-        Cardano[Cardano Nodes]
-        Solana[Solana Nodes]
-        Bitcoin[Bitcoin Nodes]
-        Polygon[Polygon Nodes]
+    subgraph "External Blockchain Networks"
+        EVM[EVM Networks<br/>Ethereum, Polygon, Arbitrum]
+        Cardano[Cardano Network<br/>Blockfrost API]
+        Solana[Solana Network<br/>RPC Nodes]
+        Bitcoin[Bitcoin Network<br/>Future Integration]
     end
     
+    subgraph "External Services"
+        PriceAPI[Price Data APIs<br/>CoinGecko, Chainlink]
+        EmailSVC[Email Service<br/>SendGrid]
+        MonitorSVC[Monitoring<br/>Prometheus, Grafana]
+    end
+    
+    %% User Interface connections
     UI --> Gateway
+    Mobile --> Gateway
+    Dashboard --> Gateway
+    API_UI --> Gateway
+    
+    %% Gateway to security
+    Gateway --> Auth
+    Gateway --> RateLimit
+    Gateway --> SSL
+    
+    %% Gateway to services
     Gateway --> TreasuryAPI
     Gateway --> PortfolioAPI
-    Gateway --> StablecoinAPI
-    Gateway --> AgentAPI
-    Gateway --> AnalyticsAPI
+    Gateway --> BlockchainAPI
     Gateway --> NotificationAPI
+    Gateway --> ReportAPI
+    Gateway --> UserAPI
     
+    %% Services to data layer
     TreasuryAPI --> PostgreSQL
     TreasuryAPI --> Redis
-    TreasuryAPI --> Ethereum
-    TreasuryAPI --> Cardano
-    TreasuryAPI --> Solana
-    TreasuryAPI --> Bitcoin
-    TreasuryAPI --> Polygon
+    PortfolioAPI --> PostgreSQL
+    PortfolioAPI --> TimeSeries
+    BlockchainAPI --> Redis
+    NotificationAPI --> PostgreSQL
+    ReportAPI --> FileStorage
+    UserAPI --> PostgreSQL
+    
+    %% Blockchain connections
+    BlockchainAPI --> EVM
+    BlockchainAPI --> Cardano
+    BlockchainAPI --> Solana
+    BlockchainAPI --> Bitcoin
+    
+    %% External service connections
+    PortfolioAPI --> PriceAPI
+    NotificationAPI --> EmailSVC
+    TreasuryAPI --> MonitorSVC
+    
+    %% Styling
+    classDef frontend fill:#F3F0FF,stroke:#7C3AED,stroke-width:2px
+    classDef api fill:#7C3AED,color:#FFFFFF,stroke:#5B21B6,stroke-width:2px
+    classDef data fill:#1E40AF,color:#FFFFFF,stroke:#1E3A8A,stroke-width:2px
+    classDef blockchain fill:#C65D3C,color:#FFFFFF,stroke:#B5472A,stroke-width:2px
+    classDef external fill:#6B7280,color:#FFFFFF,stroke:#4B5563,stroke-width:2px
+    
+    class UI,Mobile,Dashboard,API_UI frontend
+    class Gateway,Auth,RateLimit,LoadBalancer,SSL,TreasuryAPI,PortfolioAPI,BlockchainAPI,NotificationAPI,ReportAPI,UserAPI api
+    class PostgreSQL,Redis,TimeSeries,FileStorage data
+    class EVM,Cardano,Solana,Bitcoin blockchain
+    class PriceAPI,EmailSVC,MonitorSVC external
+```
+
+### **Data Flow Architecture**
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#7C3AED',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#5B21B6',
+    'lineColor': '#6B7280',
+    'sectionColor': '#F3F0FF',
+    'textColor': '#374151'
+  }
+}}%%
+flowchart LR
+    subgraph "Data Sources"
+        User[User Input]
+        Blockchain[Blockchain Networks]
+        PriceFeeds[Price Data APIs]
+        Events[System Events]
+    end
+    
+    subgraph "Data Ingestion"
+        Validator[Data Validation]
+        Transformer[Data Transformation]
+        Enricher[Data Enrichment]
+    end
+    
+    subgraph "Data Processing"
+        Analytics[Analytics Engine]
+        Aggregator[Balance Aggregator]
+        Calculator[Portfolio Calculator]
+        AlertEngine[Alert Engine]
+    end
+    
+    subgraph "Data Storage"
+        PrimaryDB[(Primary Database)]
+        CacheLayer[(Cache Layer)]
+        TimeSeriesDB[(Time Series DB)]
+        BackupStorage[(Backup Storage)]
+    end
+    
+    subgraph "Data Output"
+        API[REST APIs]
+        WebSocket[Real-time Updates]
+        Reports[Generated Reports]
+        Notifications[Alert Notifications]
+    end
+    
+    %% Flow connections
+    User --> Validator
+    Blockchain --> Validator
+    PriceFeeds --> Validator
+    Events --> Validator
+    
+    Validator --> Transformer
+    Transformer --> Enricher
+    
+    Enricher --> Analytics
+    Enricher --> Aggregator
+    Enricher --> Calculator
+    Enricher --> AlertEngine
+    
+    Analytics --> PrimaryDB
+    Aggregator --> CacheLayer
+    Calculator --> TimeSeriesDB
+    AlertEngine --> PrimaryDB
+    
+    PrimaryDB --> BackupStorage
+    
+    PrimaryDB --> API
+    CacheLayer --> WebSocket
+    TimeSeriesDB --> Reports
+    AlertEngine --> Notifications
+    
+    %% Styling
+    classDef source fill:#C65D3C,color:#FFFFFF,stroke:#B5472A,stroke-width:2px
+    classDef process fill:#7C3AED,color:#FFFFFF,stroke:#5B21B6,stroke-width:2px
+    classDef storage fill:#1E40AF,color:#FFFFFF,stroke:#1E3A8A,stroke-width:2px
+    classDef output fill:#059669,color:#FFFFFF,stroke:#047857,stroke-width:2px
+    
+    class User,Blockchain,PriceFeeds,Events source
+    class Validator,Transformer,Enricher,Analytics,Aggregator,Calculator,AlertEngine process
+    class PrimaryDB,CacheLayer,TimeSeriesDB,BackupStorage storage
+    class API,WebSocket,Reports,Notifications output
+```
+
+### **Authentication & Authorization Flow**
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#7C3AED',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#5B21B6',
+    'lineColor': '#6B7280',
+    'sectionColor': '#F3F0FF',
+    'textColor': '#374151'
+  }
+}}%%
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant G as API Gateway
+    participant A as Auth Service
+    participant S as Backend Service
+    participant D as Database
+    
+    Note over U,D: User Authentication Flow
+    
+    U->>F: Access Application
+    F->>G: Request with Credentials
+    G->>A: Validate Credentials
+    A->>D: Check User Data
+    D-->>A: User Information
+    A-->>G: JWT Token + Permissions
+    G-->>F: Authentication Response
+    F-->>U: Access Granted
+    
+    Note over U,D: API Request Flow
+    
+    U->>F: Perform Action
+    F->>G: API Request + JWT
+    G->>G: Validate JWT
+    G->>A: Check Permissions
+    A-->>G: Authorization Result
+    
+    alt Authorized Request
+        G->>S: Forward Request
+        S->>D: Execute Operation
+        D-->>S: Return Data
+        S-->>G: Service Response
+        G-->>F: API Response
+        F-->>U: Update UI
+    else Unauthorized Request
+        G-->>F: 403 Forbidden
+        F-->>U: Access Denied
+    end
+    
+    Note over U,D: Token Refresh Flow
+    
+    F->>G: Refresh Token Request
+    G->>A: Validate Refresh Token
+    A-->>G: New JWT Token
+    G-->>F: Updated Tokens
 ```
 
 ## Frontend Architecture
@@ -139,6 +344,126 @@ components/
     ├── line-chart.tsx
     ├── pie-chart.tsx
     └── candlestick-chart.tsx
+```
+
+### **Service Dependencies & Communication**
+
+```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#7C3AED',
+    'primaryTextColor': '#FFFFFF',
+    'primaryBorderColor': '#5B21B6',
+    'lineColor': '#6B7280',
+    'sectionColor': '#F3F0FF',
+    'textColor': '#374151'
+  }
+}}%%
+graph TD
+    subgraph "Client Layer"
+        WebApp[Web Application]
+        MobileApp[Mobile Application]
+        APIClient[API Clients]
+    end
+    
+    subgraph "Gateway Layer"
+        APIGateway[API Gateway<br/>Rate Limiting & Routing]
+        AuthGateway[Authentication Gateway<br/>JWT Validation]
+    end
+    
+    subgraph "Core Services"
+        UserService[User Management<br/>Service]
+        TreasuryService[Treasury Management<br/>Service]
+        PortfolioService[Portfolio Analytics<br/>Service]
+        AlertService[Alert & Notification<br/>Service]
+    end
+    
+    subgraph "Supporting Services"
+        AuthService[Authentication<br/>Service]
+        BlockchainService[Blockchain Integration<br/>Service]
+        PriceService[Price Data<br/>Service]
+        ReportService[Report Generation<br/>Service]
+    end
+    
+    subgraph "Data Services"
+        DatabaseService[(PostgreSQL<br/>Primary Database)]
+        CacheService[(Redis<br/>Cache Layer)]
+        TimeSeriesService[(TimeSeries DB<br/>Analytics)]
+        FileService[(File Storage<br/>Reports & Backups)]
+    end
+    
+    subgraph "External Dependencies"
+        BlockchainNodes[Blockchain Nodes<br/>Ethereum, Polygon, etc.]
+        PriceAPIs[Price Data APIs<br/>CoinGecko, Chainlink]
+        NotificationAPIs[Notification APIs<br/>Email, Slack, SMS]
+        MonitoringAPIs[Monitoring APIs<br/>Prometheus, Grafana]
+    end
+    
+    %% Client connections
+    WebApp --> APIGateway
+    MobileApp --> APIGateway
+    APIClient --> APIGateway
+    
+    %% Gateway connections
+    APIGateway --> AuthGateway
+    AuthGateway --> UserService
+    AuthGateway --> TreasuryService
+    AuthGateway --> PortfolioService
+    AuthGateway --> AlertService
+    
+    %% Core service dependencies
+    TreasuryService --> AuthService
+    TreasuryService --> BlockchainService
+    TreasuryService --> CacheService
+    TreasuryService --> DatabaseService
+    
+    PortfolioService --> TreasuryService
+    PortfolioService --> PriceService
+    PortfolioService --> TimeSeriesService
+    PortfolioService --> CacheService
+    
+    AlertService --> TreasuryService
+    AlertService --> PortfolioService
+    AlertService --> DatabaseService
+    AlertService --> NotificationAPIs
+    
+    ReportService --> PortfolioService
+    ReportService --> TreasuryService
+    ReportService --> FileService
+    ReportService --> TimeSeriesService
+    
+    %% Supporting service connections
+    AuthService --> DatabaseService
+    AuthService --> CacheService
+    
+    BlockchainService --> BlockchainNodes
+    BlockchainService --> CacheService
+    
+    PriceService --> PriceAPIs
+    PriceService --> CacheService
+    
+    %% Data service connections
+    DatabaseService --> FileService
+    
+    %% External monitoring
+    TreasuryService --> MonitoringAPIs
+    PortfolioService --> MonitoringAPIs
+    
+    %% Styling
+    classDef client fill:#F3F0FF,stroke:#7C3AED,stroke-width:2px
+    classDef gateway fill:#7C3AED,color:#FFFFFF,stroke:#5B21B6,stroke-width:2px
+    classDef core fill:#1E40AF,color:#FFFFFF,stroke:#1E3A8A,stroke-width:2px
+    classDef support fill:#C65D3C,color:#FFFFFF,stroke:#B5472A,stroke-width:2px
+    classDef data fill:#059669,color:#FFFFFF,stroke:#047857,stroke-width:2px
+    classDef external fill:#6B7280,color:#FFFFFF,stroke:#4B5563,stroke-width:2px
+    
+    class WebApp,MobileApp,APIClient client
+    class APIGateway,AuthGateway gateway
+    class UserService,TreasuryService,PortfolioService,AlertService core
+    class AuthService,BlockchainService,PriceService,ReportService support
+    class DatabaseService,CacheService,TimeSeriesService,FileService data
+    class BlockchainNodes,PriceAPIs,NotificationAPIs,MonitoringAPIs external
 ```
 
 ## Backend Architecture
