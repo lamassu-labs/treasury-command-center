@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAnalytics } from '../Analytics/PrivacyFirstAnalytics';
 import styles from './styles.module.css';
 
 interface PersonaPath {
@@ -123,7 +124,18 @@ const personaPaths: Record<string, PersonaPath> = {
 
 export default function PersonaSelector(): JSX.Element {
   const [selectedPersona, setSelectedPersona] = useState<string>('business');
+  const { trackPersonaSelection, trackLayerNavigation } = useAnalytics();
   const currentPath = personaPaths[selectedPersona];
+
+  const handlePersonaChange = (persona: string) => {
+    setSelectedPersona(persona);
+    trackPersonaSelection(persona);
+  };
+
+  const handleStepClick = (step: any, index: number) => {
+    const layer = `Layer-${index + 1}`;
+    trackLayerNavigation(layer, step.link);
+  };
 
   return (
     <div className={styles.personaSelector}>
@@ -137,7 +149,7 @@ export default function PersonaSelector(): JSX.Element {
           <div
             key={key}
             className={`${styles.personaCard} ${selectedPersona === key ? styles.active : ''}`}
-            onClick={() => setSelectedPersona(key)}
+            onClick={() => handlePersonaChange(key)}
             style={{ borderColor: selectedPersona === key ? persona.color : undefined }}
           >
             <h3>{persona.title}</h3>
@@ -164,7 +176,12 @@ export default function PersonaSelector(): JSX.Element {
                 <p>{step.description}</p>
                 <div className={styles.stepMeta}>
                   <span className={styles.timeTag}>📖 {step.time}</span>
-                  <a href={step.link} className={styles.stepLink} style={{ backgroundColor: currentPath.color }}>
+                  <a 
+                    href={step.link} 
+                    className={styles.stepLink} 
+                    style={{ backgroundColor: currentPath.color }}
+                    onClick={() => handleStepClick(step, index)}
+                  >
                     Start Reading →
                   </a>
                 </div>
