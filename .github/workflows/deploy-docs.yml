@@ -41,7 +41,7 @@ jobs:
         
     - name: Deploy to Staten Island VPS (nuru.network)
       if: github.ref == 'refs/heads/main'
-      uses: appleboy/ssh-action@v0.1.6
+      uses: appleboy/ssh-action@v1.2.2
       with:
         host: 74.50.113.152
         username: root
@@ -67,7 +67,7 @@ jobs:
         
     - name: Set permissions and reload nginx
       if: github.ref == 'refs/heads/main'
-      uses: appleboy/ssh-action@v0.1.6
+      uses: appleboy/ssh-action@v1.2.2
       with:
         host: 74.50.113.152
         username: root
