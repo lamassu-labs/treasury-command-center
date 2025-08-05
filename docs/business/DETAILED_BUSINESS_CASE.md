@@ -1,3 +1,9 @@
+---
+id: detailed-business-case
+title: Detailed Business Case
+sidebar_label: Detailed Business Case
+sidebar_position: 2
+---
 # Treasury Command Center - Detailed Business Case
 
 > **Comprehensive Business Analysis** - Complete ROI analysis, market assessment, and implementation strategy

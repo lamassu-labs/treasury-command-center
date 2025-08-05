@@ -1,3 +1,9 @@
+---
+id: development-setup
+title: Development Setup
+sidebar_label: Development Setup
+sidebar_position: 1
+---
 # Development Setup Guide
 
 **Complete development environment setup for Treasury Command Center**

@@ -1,3 +1,9 @@
+---
+id: contribution-overview
+title: Contribution Overview
+sidebar_label: Contribution Overview
+sidebar_position: 1
+---
 # Treasury Command Center - Community Overview
 
 > **5-Minute Onboarding** - Discover how to contribute to the Treasury Command Center open-source ecosystem

@@ -25,7 +25,7 @@
 | **Metric** | **Target** | **Measurement Method** | **Success Indicator** |
 |------------|------------|----------------------|---------------------|
 | **Task Completion Rate** | 90%+ | User journey testing | ✅ **95% Achieved** |
-| **Time to Value Recognition** | <60 seconds | Business leader journey | ✅ **15 seconds Achieved** |
+| **Time to Value Recognition** | less than 60 seconds | Business leader journey | ✅ **15 seconds Achieved** |
 | **Technical Evaluation Success** | 85%+ | Technical persona completion | ✅ **92% Projected** |
 | **First Contribution Rate** | 20%+ | Community conversion | 📊 **TBD - Tracking Needed** |
 
@@ -46,10 +46,10 @@
 ##### **High-Performance Documents**
 | **Document** | **Unique Views** | **Avg. Time on Page** | **Bounce Rate** | **Performance** |
 |--------------|------------------|---------------------|-----------------|-----------------|
-| **README.md** | 📊 **Primary Entry** | 📊 **2-3 minutes target** | 📊 **<40% target** | Monitor closely |
-| **Business Value** | 📊 **Business audience** | 📊 **3-4 minutes target** | 📊 **<30% target** | Key conversion point |
-| **Technical Evaluation** | 📊 **Technical audience** | 📊 **5-7 minutes target** | 📊 **<25% target** | Decision document |
-| **Quick Start Guide** | 📊 **Developer audience** | 📊 **10-15 minutes** | 📊 **<20% target** | Implementation success |
+| **README.md** | 📊 **Primary Entry** | 📊 **2-3 minutes target** | 📊 **less than 40% target** | Monitor closely |
+| **Business Value** | 📊 **Business audience** | 📊 **3-4 minutes target** | 📊 **less than 30% target** | Key conversion point |
+| **Technical Evaluation** | 📊 **Technical audience** | 📊 **5-7 minutes target** | 📊 **less than 25% target** | Decision document |
+| **Quick Start Guide** | 📊 **Developer audience** | 📊 **10-15 minutes** | 📊 **less than 20% target** | Implementation success |
 
 ##### **Engagement Quality Indicators**
 - **Deep Engagement**: >5 minutes on technical documents
@@ -280,10 +280,10 @@ Measurement Framework:
 #### **Persona Journey Effectiveness**
 | **Persona** | **Completion Target** | **Time Target** | **Satisfaction Target** |
 |-------------|----------------------|-----------------|------------------------|
-| **Business Leader** | 80%+ decision readiness | <15 minutes | 4.5+ stars |
-| **Technical Evaluator** | 75%+ architecture validation | <30 minutes | 4.5+ stars |
-| **Implementation Engineer** | 70%+ successful setup | <45 minutes | 4.5+ stars |
-| **Community Contributor** | 60%+ first contribution | <60 minutes | 4.5+ stars |
+| **Business Leader** | 80%+ decision readiness | less than 15 minutes | 4.5+ stars |
+| **Technical Evaluator** | 75%+ architecture validation | less than 30 minutes | 4.5+ stars |
+| **Implementation Engineer** | 70%+ successful setup | less than 45 minutes | 4.5+ stars |
+| **Community Contributor** | 60%+ first contribution | less than 60 minutes | 4.5+ stars |
 
 ### **Community Growth Metrics**
 
@@ -295,8 +295,8 @@ Measurement Framework:
 - **Community Events**: 2+ monthly activities
 
 #### **Quality Indicators**
-- **Issue Resolution Time**: <48 hours average
-- **PR Review Time**: <24 hours average
+- **Issue Resolution Time**: less than 48 hours average
+- **PR Review Time**: less than 24 hours average
 - **Documentation Updates**: Weekly improvements
 - **Community Satisfaction**: 4.5+ stars average
 

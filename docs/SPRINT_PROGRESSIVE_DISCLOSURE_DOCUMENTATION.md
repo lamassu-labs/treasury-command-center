@@ -295,12 +295,12 @@ Interest → Contribution Assessment → First Contribution → Ongoing Particip
 ## 📊 Success Criteria & Validation
 
 ### **Quantitative Metrics**
-- **Time to Value**: Business value understood in <3 seconds
-- **Technical Assessment**: Architecture comprehension in <5 minutes  
-- **Quick Start**: Running system in <15 minutes
-- **First Contribution**: Contributor onboarding in <30 minutes
+- **Time to Value**: Business value understood in less than 3 seconds
+- **Technical Assessment**: Architecture comprehension in less than 5 minutes  
+- **Quick Start**: Running system in less than 15 minutes
+- **First Contribution**: Contributor onboarding in less than 30 minutes
 - **Mobile Usability**: 90%+ mobile task completion rate
-- **Page Performance**: <2 second load times on mobile
+- **Page Performance**: less than 2 second load times on mobile
 
 ### **Qualitative Validation**
 - **User Feedback**: Positive sentiment on information clarity

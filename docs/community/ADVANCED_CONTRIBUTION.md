@@ -1,3 +1,9 @@
+---
+id: advanced-contribution
+title: Advanced Contribution
+sidebar_label: Advanced Contribution
+sidebar_position: 2
+---
 # Treasury Command Center - Advanced Contribution Guide
 
 > **Comprehensive Community Guide** - Detailed contribution processes, governance structure, and leadership opportunities

@@ -22,7 +22,7 @@
 ### **Content Standards**
 - **Persona-Specific**: Business Leaders, Technical Evaluators, Implementation Engineers, Community Contributors
 - **Cross-References**: Context-aware linking between related concepts
-- **Performance**: <2 seconds load time, WCAG 2.1 AA compliance
+- **Performance**: less than 2 seconds load time, WCAG 2.1 AA compliance
 - **Mermaid Diagrams**: Treasury Command Center branding and professional styling
 
 ## ✅ **Quality Checklist**
@@ -37,7 +37,7 @@
 
 ## 🎯 **Success Metrics**
 - **Task Completion**: 90%+ user success rate
-- **Time to Value**: <60 seconds for business understanding
+- **Time to Value**: less than 60 seconds for business understanding
 - **Mobile Experience**: 90%+ performance score
 - **Accessibility**: WCAG 2.1 AA compliance
 

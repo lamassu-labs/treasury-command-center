@@ -1,3 +1,9 @@
+---
+id: first-contribution
+title: First Contribution
+sidebar_label: First Contribution
+sidebar_position: 3
+---
 # Your First Contribution to Treasury Command Center
 
 **Goal**: Make your first meaningful contribution to Treasury Command Center in 30 minutes or less

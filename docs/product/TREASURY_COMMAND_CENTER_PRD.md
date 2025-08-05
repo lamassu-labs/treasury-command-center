@@ -1,3 +1,9 @@
+---
+id: treasury-command-center-prd
+title: Product Requirements Document
+sidebar_label: Product Requirements
+sidebar_position: 1
+---
 # Treasury Command Center - Product Requirements Document (PRD)
 
 **Document Version**: 1.0  

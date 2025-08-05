@@ -541,7 +541,7 @@ const analyticsConfig = {
 |------------|------------|-----------------|
 | **Layer 1 → Layer 2 Progression** | 70%+ | Event tracking |
 | **Average Session Duration** | 8+ minutes | GA4 metrics |
-| **Documentation Bounce Rate** | <40% | GA4 metrics |
+| **Documentation Bounce Rate** | less than 40% | GA4 metrics |
 | **Progressive Disclosure Completion** | 25%+ | Custom events |
 | **Cross-Reference Click Rate** | 60%+ | Custom events |
 | **Community Engagement** | 20%+ weekly growth | Discord/GitHub APIs |
@@ -550,7 +550,7 @@ const analyticsConfig = {
 - **User Satisfaction**: 4.5+ stars via feedback
 - **Task Completion Rate**: 90%+ success rate
 - **Documentation Accuracy**: Real-time validation
-- **Performance**: <2 seconds load time
+- **Performance**: less than 2 seconds load time
 - **Accessibility**: WCAG 2.1 AA compliance
 
 ## 🚀 **Next Steps**

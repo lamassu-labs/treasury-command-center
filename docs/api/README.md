@@ -1,3 +1,9 @@
+---
+id: api-reference
+title: API Reference
+sidebar_label: API Reference
+sidebar_position: 1
+---
 # Treasury Command Center API Documentation
 
 Comprehensive API reference for Treasury Command Center's RESTful API.

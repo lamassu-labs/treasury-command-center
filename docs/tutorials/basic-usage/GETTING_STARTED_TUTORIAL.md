@@ -1,3 +1,9 @@
+---
+id: getting-started-tutorial
+title: Getting Started Tutorial
+sidebar_label: Getting Started Tutorial
+sidebar_position: 1
+---
 # Getting Started Tutorial
 
 Step-by-step tutorial for new users to get up and running with Treasury Command Center.

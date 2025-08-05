@@ -1,3 +1,9 @@
+---
+id: architecture-overview
+title: Architecture Overview
+sidebar_label: Architecture Overview
+sidebar_position: 3
+---
 # Treasury Command Center - Technical Architecture Overview
 
 **Document Type**: Technical Architecture  

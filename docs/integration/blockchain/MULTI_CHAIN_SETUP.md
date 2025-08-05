@@ -1,3 +1,9 @@
+---
+id: multi-chain-setup
+title: Multi-Chain Setup
+sidebar_label: Multi-Chain Setup
+sidebar_position: 1
+---
 # Multi-Chain Blockchain Setup
 
 Complete guide for configuring Treasury Command Center to work with multiple blockchain networks.

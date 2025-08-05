@@ -1,3 +1,9 @@
+---
+id: quick-start
+title: Quick Start Guide
+sidebar_label: Quick Start
+sidebar_position: 1
+---
 # Quick Start Guide
 
 Get Treasury Command Center up and running in under 10 minutes with this quick start guide.

@@ -1,3 +1,9 @@
+---
+id: market-opportunity
+title: Market Opportunity
+sidebar_label: Market Opportunity
+sidebar_position: 3
+---
 # Treasury Management Market Opportunity
 
 **Document Type**: Market Analysis  

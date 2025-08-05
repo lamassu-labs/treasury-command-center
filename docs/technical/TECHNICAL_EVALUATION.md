@@ -1,3 +1,9 @@
+---
+id: technical-evaluation
+title: Technical Evaluation
+sidebar_label: Technical Evaluation
+sidebar_position: 1
+---
 # Treasury Command Center - Technical Evaluation
 
 > **5-Minute Technical Assessment** - Architecture overview, technology stack, and integration fit evaluation

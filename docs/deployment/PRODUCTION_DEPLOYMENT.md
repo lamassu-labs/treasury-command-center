@@ -1,3 +1,9 @@
+---
+id: production-deployment
+title: Production Deployment
+sidebar_label: Production Deployment
+sidebar_position: 1
+---
 # Production Deployment Guide
 
 Comprehensive guide for deploying Treasury Command Center in production environments.

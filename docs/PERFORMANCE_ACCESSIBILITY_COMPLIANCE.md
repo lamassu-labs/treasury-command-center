@@ -181,10 +181,10 @@
 
 | **Metric** | **Industry Standard** | **Treasury Command Center** | **Performance** |
 |------------|----------------------|---------------------------|-----------------|
-| **Initial Load** | <3 seconds | 0.9 seconds | ✅ **3x Faster** |
-| **Time to Interactive** | <5 seconds | 1.2 seconds | ✅ **4x Faster** |
-| **Largest Contentful Paint** | <2.5 seconds | 1.1 seconds | ✅ **2x Faster** |
-| **Cumulative Layout Shift** | <0.1 | 0.02 | ✅ **5x Better** |
+| **Initial Load** | less than 3 seconds | 0.9 seconds | ✅ **3x Faster** |
+| **Time to Interactive** | less than 5 seconds | 1.2 seconds | ✅ **4x Faster** |
+| **Largest Contentful Paint** | less than 2.5 seconds | 1.1 seconds | ✅ **2x Faster** |
+| **Cumulative Layout Shift** | less than 0.1 | 0.02 | ✅ **5x Better** |
 
 #### **Real-World Performance Testing**
 
@@ -256,7 +256,7 @@
 
 | **Compliance Area** | **Standard** | **Achievement** | **Score** |
 |--------------------|--------------|-----------------:|-----------|
-| **Loading Performance** | <3s initial load | 0.9s average | ✅ **95%** |
+| **Loading Performance** | less than 3s initial load | 0.9s average | ✅ **95%** |
 | **Mobile Responsiveness** | Touch-friendly | Fully responsive | ✅ **92%** |
 | **WCAG 2.1 AA** | Accessibility standard | Full compliance | ✅ **96%** |
 | **Screen Reader Support** | Assistive technology | Excellent compatibility | ✅ **94%** |

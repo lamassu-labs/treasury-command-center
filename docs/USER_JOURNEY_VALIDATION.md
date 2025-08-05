@@ -234,7 +234,7 @@
 - **Layer Progression**: Clear advancement from awareness to mastery
 - **Persona Optimization**: Role-specific content appropriately targeted
 - **Information Density**: Consistent with progressive complexity
-- **Navigation Efficiency**: <3 clicks to find any information
+- **Navigation Efficiency**: less than 3 clicks to find any information
 - **Mobile Optimization**: 90%+ experience scores achieved
 
 #### **📊 User Experience Metrics**

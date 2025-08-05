@@ -1,3 +1,9 @@
+---
+id: technical-deep-dive
+title: Technical Deep Dive
+sidebar_label: Technical Deep Dive
+sidebar_position: 2
+---
 # Treasury Command Center - Technical Deep Dive
 
 > **Comprehensive Technical Analysis** - Complete architecture, implementation details, project structure, and deployment strategies

@@ -280,7 +280,7 @@ docs/
 - **Task Completion**: 90%+ success rate for persona-specific goals
 - **Information Scent**: Clear indicators of content relevance
 - **Cognitive Load**: Appropriate information density per layer
-- **Navigation Efficiency**: <3 clicks to find any information
+- **Navigation Efficiency**: less than 3 clicks to find any information
 
 ---
 
